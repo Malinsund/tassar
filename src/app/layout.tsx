@@ -1,13 +1,16 @@
-import { Head, Html, Main, NextScript } from "next/document";
-
-export default function Document() {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <Html lang="en">
-      <Head />
-      <body className="antialiased">
-        <Main />
-        <NextScript />
+    <html lang="sv">
+      <body>
+        <header>
+          <h1>Min Next.js App</h1>
+        </header>
+        <main>{children}</main>
       </body>
-    </Html>
+    </html>
   );
 }
