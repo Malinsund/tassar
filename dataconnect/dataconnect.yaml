@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "tassar"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "tassar-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
