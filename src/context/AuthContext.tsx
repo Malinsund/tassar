@@ -1,64 +1,107 @@
 "use client";
-import { auth } from "@/firebaseConfig";
+import { auth, db } from "@/firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
+  UserCredential,
 } from "firebase/auth";
-import { createContext, useContext, useState } from "react";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-interface AuthContextType {
-  user: any;
-  login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string) => Promise<void>;
-  logout: () => void;
+interface User {
+  uid: string;
+  email: string | null;
+  username: string;
+  description?: string;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+interface AuthContextType {
+  user: User | null;
+  register: (
+    email: string,
+    password: string,
+    username: string
+  ) => Promise<void>;
+  login: (email: string, password: string) => Promise<UserCredential>;
+  logout: () => Promise<void>;
+}
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-};
+const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<any>(null);
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
 
-  const login = async (email: string, password: string) => {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        // Hämta användarnamnet från Firestore
+        const userDoc = await getDoc(doc(db, "users", firebaseUser.uid));
+        const userData = userDoc.exists() ? userDoc.data() : null;
+
+        setUser({
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          username: userData?.username || "Okänd användare",
+        });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const register = async (
+    email: string,
+    password: string,
+    username: string
+  ) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      console.error("Login error:", error);
-    }
-  };
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
 
-  const register = async (email: string, password: string) => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await setDoc(doc(db, "users", user.uid), {
+        username,
+        email,
+        createdAt: new Date(),
+      });
+
+      setUser({ uid: user.uid, email: user.email, username });
     } catch (error) {
       console.error("Registration error:", error);
+      throw error;
     }
   };
 
-  const logout = async () => {
-    try {
-      await auth.signOut();
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
-  };
-
-  // Hämta användarstatus
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  const login = (email: string, password: string) =>
+    signInWithEmailAndPassword(auth, email, password);
+  const logout = () => signOut(auth);
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider value={{ user, register, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+
+  return context;
 };

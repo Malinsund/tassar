@@ -1,8 +1,8 @@
 "use client";
-import LoginPage from "@/components/Login";
+import LoginPage from "@/components/Register";
 import "../globals.css";
 
-export default function Login() {
+export default function RegisterUser() {
   return (
     <div className="font-special">
       <LoginPage />

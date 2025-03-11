@@ -7,6 +7,16 @@ module.exports = {
     ],
     theme: {
       extend: {
+        colors: {
+          background: "var(--background)",
+          foreground: "var(--foreground)",
+          primary: "var(--primary)",
+          secondary: "var(--secondary)",
+          grey10:"var(--grey10)",
+          grey50:"(--grey50)",
+          destructive:"var(--destructive)",
+  
+        },
         fontFamily: {
           special:["'Special Elite'", "cursive"],
           poppins: ["'Poppins'", "sans-serif"],
