@@ -2,16 +2,18 @@
 
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
 import ProfileDescription from "@/components/ProfileDescription";
 import ProfileImage from "@/components/ProfileImage";
 import { useAuth } from "@/context/AuthContext";
+import { useProfile } from "@/context/ProfileContext";
 import { db } from "@/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export default function ProfilePage() {
   const { user } = useAuth();
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const { imageUrl, setImageUrl } = useProfile();
   const [description, setDescription] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -57,14 +59,10 @@ export default function ProfilePage() {
   return (
     <div>
       <Header imageUrl={imageUrl} />
+      <Navbar />
       <div className="grid grid-cols-4 gap-2">
         <div className="flex flex-col justify-center text-center items-center bg-slate-300 col-span-1 p-4 gap-2">
-          <ProfileImage
-            userId={user.uid}
-            imageUrl={imageUrl}
-            setImageUrl={setImageUrl}
-            isEditing={isEditing}
-          />
+          <ProfileImage userId={user.uid} isEditing={isEditing} />
           {username && <h2 className="text-2xl font-bold">@{username}</h2>}
 
           <ProfileDescription

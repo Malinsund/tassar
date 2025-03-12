@@ -1,4 +1,5 @@
 "use client";
+import { useProfile } from "@/context/ProfileContext";
 import { db, storage } from "@/firebaseConfig"; // Importera Firebase-konfigurationen
 import { CameraIcon } from "@heroicons/react/24/outline";
 import { doc, setDoc } from "firebase/firestore";
@@ -8,15 +9,12 @@ import { useRef, useState } from "react";
 // Komponent för att hantera profilbilden
 export default function ProfileImage({
   userId,
-  imageUrl,
-  setImageUrl,
   isEditing,
 }: {
   userId: string;
-  imageUrl: string | null;
-  setImageUrl: React.Dispatch<React.SetStateAction<string | null>>;
   isEditing: boolean;
 }) {
+  const { imageUrl, setImageUrl } = useProfile();
   const [profileImage, setProfileImage] = useState<File | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

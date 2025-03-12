@@ -1,8 +1,10 @@
 "use client";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import ProfileImageView from "./ProfileImageView";
+import { useProfile } from "@/context/ProfileContext";
 
-export default function Header({ imageUrl }: { imageUrl: string | null }) {
+export default function Header() {
+  const { imageUrl } = useProfile();
   return (
     <div className="flex justify-between w-screen">
       <div>

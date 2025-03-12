@@ -28,3 +28,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.nav{
+  border-radius: 9px;
+  color: #1D4265;
+}
+.nav:hover{
+  background:var(--grey10)
+}
+.nav.active{
+  background: #1D4265;
+  color: white;
+}

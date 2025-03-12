@@ -1,4 +1,5 @@
 import { AuthProvider } from "@/context/AuthContext";
+import { ProfileProvider } from "@/context/ProfileContext";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -25,10 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="font-poppins">
       <AuthProvider>
+        <ProfileProvider>
         <body>
-          
           {children}
         </body>
+        </ProfileProvider>
       </AuthProvider>
     </html>
   );

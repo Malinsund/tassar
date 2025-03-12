@@ -1,27 +1,36 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => {
+    return pathname === path ? "active" : "";
+  };
+
   return (
     <div className="flex justify-between m-6 font-special text-2xl">
-      <div>
-        <h2>Flöde</h2>
+      <div className={`nav p-2 ${isActive("/posts")}`}>
+        <Link href={"/posts"}>
+          <h2>Flöde</h2>
+        </Link>
       </div>
-      <div>
+      <div className={`nav p-2 ${isActive("/forum")}`}>
         <Link href={"/forum"}>
           <h2>Forum</h2>
         </Link>
       </div>
-      <div>
+      <div className={`nav p-2 ${isActive("/")}`}>
         <h2>Omplacering</h2>
       </div>
-      <div>
+      <div className={`nav p-2 ${isActive("/")}`}>
         <h2>Efterlysning</h2>
       </div>
-      <div>
+      <div className={`nav p-2 ${isActive("/")}`}>
         <h2>Organisationer</h2>
       </div>
-      <div>
+      <div className={`nav p-2 ${isActive("/profile")}`}>
         <Link href={"/profile"}>
           <h2>Profil</h2>
         </Link>
