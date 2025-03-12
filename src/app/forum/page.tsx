@@ -6,7 +6,9 @@ export default function Forum() {
   return (
     <div>
       <Header />
-      <Navbar />
+      <div className="hidden lg:block">
+        <Navbar />
+      </div>
       <h1>hej hej forumet!</h1>
     </div>
   );

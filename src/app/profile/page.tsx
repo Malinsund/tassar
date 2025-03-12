@@ -58,9 +58,11 @@ export default function ProfilePage() {
 
   return (
     <div>
-      <Header imageUrl={imageUrl} />
-      <Navbar />
-      <div className="grid grid-cols-4 gap-2">
+      <Header />
+      <div className="hidden lg:block">
+        <Navbar />
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
         <div className="flex flex-col justify-center text-center items-center bg-slate-300 col-span-1 p-4 gap-2">
           <ProfileImage userId={user.uid} isEditing={isEditing} />
           {username && <h2 className="text-2xl font-bold">@{username}</h2>}
@@ -73,21 +75,28 @@ export default function ProfilePage() {
             isEditing={isEditing}
             saveAllChanges={saveAllChanges}
           />
-          <PrimaryButton
-            onClick={() => {
-              setIsEditing(!isEditing);
-              if (!isEditing) {
-                saveAllChanges();
-              }
-            }}
-            text={isEditing ? "Spara" : "Redigera profil"}
-          />
+          <div className="flex gap-8">
+            <PrimaryButton
+              onClick={() => {
+                setIsEditing(!isEditing);
+                if (!isEditing) {
+                  saveAllChanges();
+                }
+              }}
+              text={isEditing ? "Spara" : "Redigera profil"}
+            />
+            <div className="lg:hidden">
+              <PrimaryButton text={"Meddelanden"} />
+            </div>
+          </div>
         </div>
+
         <div className="bg-blue-100 col-span-2">
           <h1>bilder</h1>
           {/* bild containern */}
         </div>
-        <div className="bg-pink-300 col-span-1">
+
+        <div className="bg-pink-300 col-span-1 hidden lg:block">
           <h1>meddelanden</h1>
           {/* meddelande containern vid stort fönster */}
         </div>
