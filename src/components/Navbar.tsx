@@ -22,8 +22,8 @@ export default function Navbar() {
         <h2>Organisationer</h2>
       </div>
       <div>
-        <Link href={"/profil"}>
-          <h2 className="">Profil</h2>
+        <Link href={"/profile"}>
+          <h2>Profil</h2>
         </Link>
       </div>
     </div>
