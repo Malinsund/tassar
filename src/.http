@@ -1,0 +1,8 @@
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+  "description": "Test Description",
+  "imageUrl": "https://example.com/test-image.jpg",
+  "userId": "user-uid-12345"
+}
