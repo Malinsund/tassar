@@ -6,6 +6,7 @@ import PostModal from "@/components/PostModal";
 import { useProfile } from "@/context/ProfileContext";
 import { mockPosts } from "@/data/mockPosts";
 import { db } from "@/firebaseConfig";
+import { PlusIcon } from "@heroicons/react/24/outline";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
@@ -55,14 +56,15 @@ export default function PostPage() {
       <div className="hidden lg:block sticky top-0">
         <Navbar />
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-4 text-center gap-2">
-        <div className="lg:col-span-1 bg-purple-300">
-          <div>
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
+        <div className="lg:col-span-1"></div>
+        <div className="lg:col-span-2 overflow-y-scroll h-screen">
+          <div className="sticky top-0 flex justify-center z-30">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-blue-500 text-white p-2 rounded w-80"
+              className="bg-greyopac text-black p-2 text-center place-items-center rounded w-full lg:w-2/3"
             >
-              Lägg upp nytt inlägg
+              <PlusIcon className="w-8 h-8" />
             </button>
 
             <PostModal
@@ -70,12 +72,6 @@ export default function PostPage() {
               onClose={() => setIsModalOpen(false)}
             />
           </div>
-        </div>
-        <div className="lg:col-span-2 bg-yellow-200 overflow-y-scroll h-screen">
-          <h1>
-            Flöde - Här skall inlägged vara som stora kort (skapa komponent för
-            korten)
-          </h1>
 
           {/* 
           {posts.map((post) => (
@@ -92,9 +88,7 @@ export default function PostPage() {
             />
           ))}
         </div>
-        <div className="lg:col-span-1 bg-green-200 hidden lg:block">
-          <p>här skriver man kommenter på inlägget på stor skärm</p>
-        </div>
+        <div className="lg:col-span-1 hidden lg:block"></div>
       </div>
     </div>
   );

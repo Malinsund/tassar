@@ -16,15 +16,15 @@ export default function PostCard({
   timestamp,
 }: PostCardProps) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-4">
+    <div className="flex flex-col items-center bg-white rounded-lg shadow-md p-4 mb-4">
       {/* Profilsektion */}
-      <div className="flex items-center gap-3">
+      <div className="flex gap-3">
         <Image
           src={userProfileImage}
           alt={`${username}s profilbild`}
           width={40}
           height={40}
-          className="rounded-full"
+          className="rounded-full w-10 h-10"
         />
         <div>
           <p className="font-semibold">{username}</p>
@@ -35,13 +35,13 @@ export default function PostCard({
       </div>
 
       {/* Inläggsbild */}
-      <div className="mt-3 ">
+      <div className="mt-3">
         <Image
           src={imageUrl}
           alt="Post image"
           width={500}
           height={500}
-          className="rounded-lg object-cover w-96 h-96 "
+          className="rounded-lg object-cover w-80 h-80 lg:w-[600px] lg:h-[600px] "
         />
       </div>
 
