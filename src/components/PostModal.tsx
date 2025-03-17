@@ -1,49 +1,55 @@
 "use client";
+import { useAuth } from "@/context/AuthContext";
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext"; // AuthContext för autentisering
 
 interface PostModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onPostAdded: (newPost: any) => void;
 }
 
-export default function PostModal({ isOpen, onClose }: PostModalProps) {
-  const [image, setImage] = useState<string | null>(null); // För lagring av bild-URL
+export default function PostModal({
+  isOpen,
+  onClose,
+  onPostAdded,
+}: PostModalProps) {
+  const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
   const { user } = useAuth();
-  const router = useRouter();
 
-  const handleImageUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const storage = getStorage();
-      const storageRef = ref(storage, `post-images/${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+      setImage(event.target.files[0]);
+      console.log("Vald bild:", event.target.files[0]);
+    }
+  };
 
+  const uploadImageToStorage = async () => {
+    if (!image) return null;
+
+    const storage = getStorage();
+    const storageRef = ref(storage, `post-images/${image.name}-${Date.now()}`);
+    const uploadTask = uploadBytesResumable(storageRef, image);
+
+    return new Promise<string>((resolve, reject) => {
       uploadTask.on(
         "state_changed",
-        (snapshot) => {
-          // Hantera uppladdningens framsteg här om du vill
-        },
-        (error) => {
-          console.error("Error uploading image:", error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setImage(downloadURL);
-          });
+        null,
+        (error) => reject(error),
+        async () => {
+          const url = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve(url);
         }
       );
-    }
+    });
   };
 
   const handlePostSubmit = async () => {
@@ -52,61 +58,57 @@ export default function PostModal({ isOpen, onClose }: PostModalProps) {
       return;
     }
 
-    const userUid = user?.uid;
-    if (!userUid) {
-      alert("Du måste vara inloggad för att lägga upp ett inlägg.");
-      return;
-    }
-
-    const postData = {
-      description,
-      imageUrl: image,
-      userId: userUid,
-    };
+    setLoading(true);
 
     try {
+      const uploadedImageUrl = await uploadImageToStorage();
+      if (!uploadedImageUrl)
+        throw new Error("Misslyckades att ladda upp bilden");
+
+      const newPost = {
+        userId: user?.uid,
+        username: user?.username || "Okänd användare",
+        userProfileImage: imageUrl || "/default-profile.png",
+        imageUrl: uploadedImageUrl,
+        description,
+      };
+
       const response = await fetch("/api/posts", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newPost),
       });
 
       const result = await response.json();
-
       if (response.ok) {
-        alert("Inlägg uppladdat!");
+        onPostAdded({
+          id: result.id,
+          ...newPost,
+          timestamp: new Date().toString(),
+        });
         onClose();
-        router.push("/posts");
       } else {
-        alert(`Fel: ${result.message}`);
+        alert(`Fel: ${result.error}`);
       }
     } catch (error) {
-      console.error("Error uploading post:", error);
+      console.error("Fel vid uppladdning:", error);
       alert("Det gick inte att ladda upp inlägget.");
     }
+
+    setLoading(false);
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-lg w-96">
-        <h2 className="text-lg font-bold mb-4">Lägg upp nytt inlägg</h2>
+        <h2 className="text-lg font-bold mb-4">Nytt inlägg</h2>
 
         {/* Bilduppladdning */}
         <input type="file" accept="image/*" onChange={handleImageUpload} />
-
-        {/* Förhandsgranskning av bild */}
         {image && (
-          <div className="relative w-64 h-64 border-2 border-gray-300 overflow-hidden mt-4">
-            <img
-              src={image}
-              alt="Uploaded"
-              className="object-cover w-full h-full"
-            />
-          </div>
+          <p className="text-sm text-gray-500 mt-2">Bild vald: {image.name}</p>
         )}
 
         {/* Beskrivning */}
@@ -123,13 +125,14 @@ export default function PostModal({ isOpen, onClose }: PostModalProps) {
             onClick={onClose}
             className="bg-gray-400 text-white p-2 rounded"
           >
-            Ångra
+            Stäng
           </button>
           <button
             onClick={handlePostSubmit}
             className="bg-blue-500 text-white p-2 rounded"
+            disabled={loading}
           >
-            Lägg upp
+            {loading ? "Laddar upp..." : "Lägg upp"}
           </button>
         </div>
       </div>
