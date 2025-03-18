@@ -1,5 +1,5 @@
 import { db } from "@/firebaseConfig";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import CommentBubble from "./buttons/CommentButton";
@@ -14,7 +14,11 @@ interface PostCardProps {
   imageUrl: string;
   postDescription: string;
   timestamp: string;
-  postComments: string[];
+  postComments: { text: string; username: string }[];
+}
+interface Comment {
+  text: string;
+  username: string;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -27,37 +31,55 @@ const PostCard: React.FC<PostCardProps> = ({
   timestamp,
   postComments,
 }) => {
-  const [isClient, setIsClient] = useState(false);
-  const [comments, setComments] = useState<string[]>(postComments || []);
+  const [comments, setComments] = useState(postComments || []);
   const [isCommenting, setIsCommenting] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) {
-    return null;
-  }
 
   const formattedDate = new Date(timestamp).toLocaleString();
 
-  const handleAddComment = async (newComment: string | undefined) => {
+  useEffect(() => {
+    const fetchPostComments = async () => {
+      const postRef = doc(db, "posts", id);
+      const postDoc = await getDoc(postRef);
+
+      if (postDoc.exists()) {
+        const updatedPost = postDoc.data();
+        setComments(updatedPost?.postComments || []);
+      }
+    };
+
+    fetchPostComments();
+  }, [id]);
+
+  const handleAddComment = async (
+    newComment: string | undefined,
+    username: string
+  ) => {
     if (!newComment || newComment.trim() === "") {
       console.error("Kommentar är tom!!");
       return;
     }
 
-    const postRef = doc(db, "posts", id);
-    await updateDoc(postRef, {
-      postComments: arrayUnion(newComment || ""),
-    });
+    const commentData = {
+      text: newComment,
+      username: username,
+    };
 
-    setComments((prevComments) => [...prevComments, newComment]);
+    const postRef = doc(db, "posts", id);
+
+    try {
+      await updateDoc(postRef, {
+        postComments: arrayUnion(commentData),
+      });
+
+      setComments((prevComments) => [...prevComments, commentData]);
+    } catch (error) {
+      console.error("Fel vid uppdatering av Firestore:", error);
+    }
   };
+
   const toggleCommentsVisibility = () => {
     setIsCommenting((prev) => !prev);
   };
-
   return (
     <>
       <div className="bg-gray-100 rounded-lg shadow-md p-4 mb-4">
@@ -89,7 +111,10 @@ const PostCard: React.FC<PostCardProps> = ({
         <CommentBubble comments={comments} />
 
         {/* Formulär för att lägga till en kommentar */}
-        {isCommenting && <CommentForm onAddComment={handleAddComment} />}
+
+        {isCommenting && (
+          <CommentForm onAddComment={handleAddComment} username={username} />
+        )}
 
         {/* Knapp för att visa/öppna kommentarsfältet */}
         <button

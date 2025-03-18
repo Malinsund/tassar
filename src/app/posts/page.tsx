@@ -16,7 +16,7 @@ interface Post {
   imageUrl: string;
   postDescription: string;
   timestamp: string;
-  postComments: string[];
+  postComments: { text: string; username: string }[];
 }
 
 export default function PostPage() {
@@ -44,19 +44,13 @@ export default function PostPage() {
             .data()
             .createdAt?.toDate()
             .toString() || "",
-        postComments: doc.data().comments || [],
+        postComments:
+          doc.data().comments?.map((c: any) => ({
+            text: c.text || "",
+            username: c.username || "Okänd användare",
+          })) || [],
       }));
 
-      /* const posts = postsData.map((post: any) => ({
-        id: post.id,
-        username: post.username,
-        userProfileImage: post.userProfileImage,
-        imageUrl: post.imageUrl,
-        postDescription: post.description,
-        timestamp: post.createdAt.toDate().toString(),
-        postComments: post.comments || [],
-      }));
- */
       setPosts(posts);
     };
 

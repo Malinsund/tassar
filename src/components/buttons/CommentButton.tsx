@@ -1,8 +1,12 @@
 import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
+interface Comment {
+  username: string;
+  text: string;
+}
 interface CommentProps {
-  comments: string[];
+  comments: Comment[];
 }
 
 const CommentBubble: React.FC<CommentProps> = ({ comments }) => {
@@ -27,7 +31,8 @@ const CommentBubble: React.FC<CommentProps> = ({ comments }) => {
           {comments.length > 0 ? (
             comments.map((comment, index) => (
               <p key={index} className="text-sm text-gray-700">
-                {comment}
+                <strong>@{comment.username}: </strong>
+                {comment.text}
               </p>
             ))
           ) : (

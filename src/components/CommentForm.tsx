@@ -2,8 +2,10 @@ import { useState } from "react";
 
 const CommentForm = ({
   onAddComment,
+  username,
 }: {
-  onAddComment: (comment: string) => void;
+  onAddComment: (comment: string, username: string) => void;
+  username: string;
 }) => {
   const [comment, setComment] = useState("");
 
@@ -15,7 +17,7 @@ const CommentForm = ({
     e.preventDefault();
     if (!comment.trim()) return;
 
-    onAddComment(comment);
+    onAddComment(comment, username);
     setComment("");
   };
 
