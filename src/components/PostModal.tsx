@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@/context/AuthContext";
+import { useProfile } from "@/context/ProfileContext";
 import {
   getDownloadURL,
   getStorage,
@@ -20,7 +21,8 @@ export default function PostModal({
   onPostAdded,
 }: PostModalProps) {
   const [image, setImage] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [postImageUrl, setPostImageUrl] = useState<string | null>(null);
+  const { imageUrl: userProfileImage } = useProfile();
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
@@ -65,13 +67,16 @@ export default function PostModal({
       if (!uploadedImageUrl)
         throw new Error("Misslyckades att ladda upp bilden");
 
+      setPostImageUrl(uploadedImageUrl);
+
       const newPost = {
         userId: user?.uid,
         username: user?.username || "Okänd användare",
-        userProfileImage: imageUrl || "/default-profile.png",
+        userProfileImage: userProfileImage || "/noImage.svg",
         imageUrl: uploadedImageUrl,
         description,
       };
+      console.log("skickar till servern", newPost);
 
       const response = await fetch("/api/posts", {
         method: "POST",
@@ -80,6 +85,7 @@ export default function PostModal({
       });
 
       const result = await response.json();
+      console.log("svarfrån servern:", result);
       if (response.ok) {
         onPostAdded({
           id: result.id,

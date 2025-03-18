@@ -81,6 +81,7 @@ export default function PostPage() {
               key={post.id}
               id={post.id}
               username={post.username}
+              userId={post.id}
               userProfileImage={post.userProfileImage}
               imageUrl={post.imageUrl}
               postDescription={post.postDescription}

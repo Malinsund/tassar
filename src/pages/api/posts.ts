@@ -5,9 +5,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     try {
+      console.log("request body:", req.body);
       const { userId, username, userProfileImage, imageUrl, description } = req.body;
 
       if (!userId || !imageUrl || !description) {
+        console.log("saknas:", req.body)
         return res.status(400).json({ error: "Alla fält måste vara ifyllda" });
       }
 
