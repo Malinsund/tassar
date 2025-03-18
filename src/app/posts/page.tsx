@@ -16,6 +16,7 @@ interface Post {
   imageUrl: string;
   postDescription: string;
   timestamp: string;
+  postComments: string[];
 }
 
 export default function PostPage() {
@@ -30,19 +31,32 @@ export default function PostPage() {
         query(collection(db, "posts"), orderBy("createdAt", "desc"))
       );
       const postsData = querySnapshot.docs.map((doc) => {
-        console.log("Post ID:", doc.id);
         return doc.data();
       });
+      const posts = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        username: doc.data().username,
+        userProfileImage: doc.data().userProfileImage,
+        imageUrl: doc.data().imageUrl,
+        postDescription: doc.data().description,
+        timestamp:
+          doc
+            .data()
+            .createdAt?.toDate()
+            .toString() || "",
+        postComments: doc.data().comments || [],
+      }));
 
-      const posts = postsData.map((post: any) => ({
+      /* const posts = postsData.map((post: any) => ({
         id: post.id,
         username: post.username,
         userProfileImage: post.userProfileImage,
         imageUrl: post.imageUrl,
         postDescription: post.description,
         timestamp: post.createdAt.toDate().toString(),
+        postComments: post.comments || [],
       }));
-
+ */
       setPosts(posts);
     };
 
@@ -86,6 +100,7 @@ export default function PostPage() {
               imageUrl={post.imageUrl}
               postDescription={post.postDescription}
               timestamp={post.timestamp}
+              postComments={post.postComments}
             />
           ))}
         </div>

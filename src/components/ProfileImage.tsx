@@ -10,9 +10,11 @@ import { useRef, useState } from "react";
 export default function ProfileImage({
   userId,
   isEditing,
+  size = 32,
 }: {
   userId: string;
   isEditing: boolean;
+  size?: number;
 }) {
   const { imageUrl, setImageUrl } = useProfile();
   const [profileImage, setProfileImage] = useState<File | null>(null);
@@ -54,7 +56,8 @@ export default function ProfileImage({
         <img
           src={imageUrl}
           alt="Profilbild"
-          className="rounded-full w-32 h-32 m-4"
+          className="rounded-full object-cover"
+          style={{ width: size, height: size }}
         />
       ) : (
         <div>
