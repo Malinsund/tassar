@@ -82,7 +82,7 @@ const PostCard: React.FC<PostCardProps> = ({
   };
   return (
     <>
-      <div className="bg-gray-100 rounded-lg shadow-md p-4 mb-4">
+      <div className="bg-gray-100 rounded-lg shadow-md p-4 mb-4 font-poppins">
         {/* Profilsektion */}
         <div className="flex items-center gap-3">
           <div className="h-10 m-2">
@@ -119,7 +119,7 @@ const PostCard: React.FC<PostCardProps> = ({
         {/* Knapp för att visa/öppna kommentarsfältet */}
         <button
           onClick={toggleCommentsVisibility}
-          className="mt-4 text-blue-500 hover:text-blue-700"
+          className="mt-4 text-primary hover:text-black"
         >
           {isCommenting ? "Dölj kommentarer" : "Lägg till en kommentar"}
         </button>

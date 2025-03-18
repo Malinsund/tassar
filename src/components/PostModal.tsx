@@ -8,6 +8,8 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { useState } from "react";
+import PrimaryButton from "./buttons/PrimaryButton";
+import SecondaryButton from "./buttons/Secondarybutton";
 
 interface PostModalProps {
   isOpen: boolean;
@@ -127,19 +129,13 @@ export default function PostModal({
 
         {/* Knappar */}
         <div className="mt-4 flex justify-between">
-          <button
-            onClick={onClose}
-            className="bg-gray-400 text-white p-2 rounded"
-          >
-            Stäng
-          </button>
-          <button
+          <SecondaryButton onClick={onClose} text="stäng" />
+
+          <PrimaryButton
+            text={loading ? "Laddar upp..." : "Lägg upp"}
             onClick={handlePostSubmit}
-            className="bg-blue-500 text-white p-2 rounded"
             disabled={loading}
-          >
-            {loading ? "Laddar upp..." : "Lägg upp"}
-          </button>
+          />
         </div>
       </div>
     </div>

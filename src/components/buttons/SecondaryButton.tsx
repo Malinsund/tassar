@@ -1,4 +1,4 @@
-interface PrimaryButtonProps {
+interface SecondaryButtonProps {
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   text: string;
@@ -6,18 +6,18 @@ interface PrimaryButtonProps {
   disabled?: boolean;
 }
 
-export default function PrimaryButton({
+export default function SecondaryButton({
   onClick,
   type = "button",
   text,
   className = "",
   disabled = false,
-}: PrimaryButtonProps) {
+}: SecondaryButtonProps) {
   return (
     <button
       onClick={onClick}
       type={type}
-      className={`bg-primary text-white font-special font-semibold text-lg p-2 rounded-lg ${className}`}
+      className={`bg-grey50 text-white font-special font-semibold text-lg p-2 rounded-lg ${className}`}
       disabled={disabled}
     >
       {text}

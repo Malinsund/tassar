@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PrimaryButton from "./buttons/PrimaryButton";
 
 const CommentForm = ({
   onAddComment,
@@ -27,15 +28,10 @@ const CommentForm = ({
         type="text"
         value={comment}
         onChange={handleCommentChange}
-        className="w-full p-2 rounded-lg border border-gray-300"
+        className="w-full p-2 mb-3 rounded-lg border border-gray-300"
         placeholder="Kommentera..."
       />
-      <button
-        type="submit"
-        className="mt-2 bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        Lägg till
-      </button>
+      <PrimaryButton type="submit" text="lägg till" />
     </form>
   );
 };

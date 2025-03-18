@@ -23,14 +23,14 @@ const CommentBubble: React.FC<CommentProps> = ({ comments }) => {
         className="flex items-center gap-2 text-gray-600 hover:text-gray-800"
       >
         <ChatBubbleLeftIcon className="w-6 h-6" />
-        <span>{comments.length} Comments</span>
+        <span>{comments.length} Kommentarer</span>
       </button>
 
       {isOpen && (
-        <div className="mt-2 p-2 bg-gray-100 rounded-lg">
+        <div className="mt-2 p-2 bg-slate-50 rounded-lg">
           {comments.length > 0 ? (
             comments.map((comment, index) => (
-              <p key={index} className="text-sm text-gray-700">
+              <p key={index} className="text-sm pb-2 text-gray-700">
                 <strong>@{comment.username}: </strong>
                 {comment.text}
               </p>
