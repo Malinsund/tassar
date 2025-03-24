@@ -14,7 +14,7 @@ interface Post {
   username: string;
   userProfileImage: string;
   imageUrl: string;
-  postDescription: string;
+  description: string;
   timestamp: string;
   postComments: { text: string; username: string }[];
 }
@@ -38,7 +38,7 @@ export default function PostPage() {
         username: doc.data().username,
         userProfileImage: doc.data().userProfileImage,
         imageUrl: doc.data().imageUrl,
-        postDescription: doc.data().description,
+        description: doc.data().description,
         timestamp:
           doc
             .data()
@@ -92,7 +92,7 @@ export default function PostPage() {
               userId={post.id}
               userProfileImage={post.userProfileImage}
               imageUrl={post.imageUrl}
-              postDescription={post.postDescription}
+              postDescription={post.description}
               timestamp={post.timestamp}
               postComments={post.postComments}
             />

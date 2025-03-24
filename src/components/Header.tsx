@@ -67,7 +67,7 @@ export default function Header() {
         </div>
 
         <div className="p-4 text-white">
-          <h2>En rappikaljamaddafakka som tittar</h2>
+          <h2>En rappikalja som tittar</h2>
           <div className="hidden lg:block">
             <LogoutButton />
           </div>

@@ -7,12 +7,12 @@ import { db } from "@/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-// Komponent för att visa andras profiler
-export default function UserProfile({
-  params,
-}: {
+interface UserProfileProps {
   params: { userId: string };
-}) {
+}
+
+// Komponent för att visa andras profiler
+export default function UserProfile({ params }: UserProfileProps) {
   const { userId } = params;
   const [username, setUsername] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
