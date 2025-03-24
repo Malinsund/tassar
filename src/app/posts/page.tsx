@@ -73,7 +73,7 @@ export default function PostPage() {
           <div className="sticky top-0 flex justify-center z-30">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-greyopac text-black p-2 text-center place-items-center rounded w-full lg:w-2/3"
+              className="bg-greyopac text-black p-2 text-center place-items-center  w-full"
             >
               <PlusIcon className="w-8 h-8" />
             </button>

@@ -14,6 +14,7 @@ module.exports = {
           secondary: "var(--secondary)",
           grey10:"var(--grey10)",
           grey50:"var(--grey50)",
+          greyopac:"var(--greyopac)",
           destructive:"var(--destructive)",
   
         },

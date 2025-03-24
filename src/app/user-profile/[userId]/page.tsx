@@ -5,15 +5,14 @@ import Navbar from "@/components/Navbar";
 import ProfileImage from "@/components/ProfileImage";
 import { db } from "@/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
-interface UserProfileProps {
-  params: { userId: string };
-}
-
-// Komponent för att visa andras profiler
-export default function UserProfile({ params }: UserProfileProps) {
-  const { userId } = params;
+export default function UserProfile({
+  params,
+}: {
+  params: Promise<{ userId: string }>;
+}) {
+  const { userId } = use(params);
   const [username, setUsername] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | null>(null);

@@ -4,6 +4,7 @@ interface PrimaryButtonProps {
   text: string;
   className?: string;
   disabled?: boolean;
+  /* lägga till Variant */
 }
 
 export default function PrimaryButton({
