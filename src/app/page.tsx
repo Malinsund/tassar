@@ -25,7 +25,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col justify-center text-center">
+    <div className="flex flex-col justify-center text-center ">
       <div className="flex justify-center p-4">
         <img src="/tassar.svg" alt="icon" />
       </div>
