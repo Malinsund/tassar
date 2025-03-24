@@ -1,6 +1,8 @@
+import { useAuth } from "@/context/AuthContext";
 import { db } from "@/firebaseConfig";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import CommentBubble from "./buttons/CommentButton";
 import CommentForm from "./CommentForm";
@@ -33,6 +35,7 @@ const PostCard: React.FC<PostCardProps> = ({
 }) => {
   const [comments, setComments] = useState(postComments || []);
   const [isCommenting, setIsCommenting] = useState(false);
+  const { user } = useAuth();
 
   const formattedDate = new Date(timestamp).toLocaleString();
 
@@ -80,6 +83,9 @@ const PostCard: React.FC<PostCardProps> = ({
   const toggleCommentsVisibility = () => {
     setIsCommenting((prev) => !prev);
   };
+
+  const profileLink = user?.uid === userId ? "/profile" : `/profile/${userId}`;
+
   return (
     <>
       <div className="bg-gray-100 rounded-lg shadow-md p-4 mb-4 font-poppins">
@@ -89,7 +95,12 @@ const PostCard: React.FC<PostCardProps> = ({
             <ProfileImage userId={userId} isEditing={false} />
           </div>
           <div>
-            <p className="font-semibold">{username}</p>
+            <Link
+              href={profileLink}
+              className="font-semibold text-blue-500 hover:underline"
+            >
+              <p className="font-semibold">@{username}</p>
+            </Link>
             <p className="text-sm text-gray-500">{formattedDate}</p>
           </div>
         </div>

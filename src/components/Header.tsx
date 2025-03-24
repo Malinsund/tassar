@@ -17,8 +17,8 @@ export default function Header() {
         <img src="/Pawprints.jpg" alt="love" />
       </div>
       <div className="lg:hidden">
-        <button onClick={() => setIsOpen(true)} className="text-orange-500">
-          <Bars3Icon className="w-8 h-8 bg-pink-500 cursor-pointer" />
+        <button onClick={() => setIsOpen(true)} className="text-black">
+          <Bars3Icon className="w-8 h-8 cursor-pointer" />
         </button>
       </div>
 
@@ -35,7 +35,7 @@ export default function Header() {
 
       {/* Hamburgermeny med slide-in effekt */}
       <div
-        className={`fixed top-0 left-0 h-screen w-3/4 bg-white shadow-lg lg:hidden transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-screen w-3/4 z-50 bg-white shadow-lg lg:hidden transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -52,7 +52,7 @@ export default function Header() {
 
       {/* Profilmeny */}
       <div
-        className={`fixed top-0 right-0 h-auto w-auto bg-green-700 rounded-l-md shadow-lg  transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-auto w-auto bg-secondary rounded-l-md shadow-lg  transform transition-transform duration-300 ${
           profileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -60,7 +60,7 @@ export default function Header() {
         <div className=" p-4">
           <button
             onClick={() => setProfileMenuOpen(false)}
-            className="text-yellow-300"
+            className="text-primary"
           >
             <XMarkIcon className="w-8 h-8 cursor-pointer" />
           </button>
