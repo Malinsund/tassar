@@ -1,4 +1,5 @@
 "use client";
+
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import {
@@ -11,11 +12,13 @@ import { useState } from "react";
 import PrimaryButton from "./buttons/PrimaryButton";
 import SecondaryButton from "./buttons/SecondaryButton";
 
+
 interface PostModalProps {
   isOpen: boolean;
   onClose: () => void;
   onPostAdded: (newPost: any) => void;
 }
+
 
 export default function PostModal({
   isOpen,
@@ -106,9 +109,11 @@ export default function PostModal({
     setLoading(false);
   };
 
+
   if (!isOpen) return null;
 
   return (
+
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-lg w-96">
         <h2 className="text-lg font-bold mb-4">Nytt inlägg</h2>
@@ -118,6 +123,7 @@ export default function PostModal({
         {image && (
           <p className="text-sm text-gray-500 mt-2">Bild vald: {image.name}</p>
         )}
+
 
         {/* Beskrivning */}
         <textarea
@@ -129,6 +135,7 @@ export default function PostModal({
 
         {/* Knappar */}
         <div className="mt-4 flex justify-between">
+
           <SecondaryButton onClick={onClose} text="stäng" />
 
           <PrimaryButton
@@ -136,6 +143,7 @@ export default function PostModal({
             onClick={handlePostSubmit}
             disabled={loading}
           />
+
         </div>
       </div>
     </div>
