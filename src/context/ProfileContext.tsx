@@ -1,10 +1,9 @@
 "use client";
-
 import { db } from "@/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import {
-  createContext,
   ReactNode,
+  createContext,
   useContext,
   useEffect,
   useState,
@@ -13,44 +12,35 @@ import { useAuth } from "./AuthContext";
 
 interface ProfileContextType {
   imageUrl: string | null;
-  setImageUrl: React.Dispatch<React.SetStateAction<string | null>>;
+  setImageUrl: (url: string) => void;
 }
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined);
 
 export const ProfileProvider = ({ children }: { children: ReactNode }) => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const { user } = useAuth();
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchProfileImage = async () => {
-      if (user?.uid) {
+    if (user?.uid) {
+      const fetchProfileImage = async () => {
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.exists()) {
           setImageUrl(userDoc.data().profileImage || null);
         }
-      }
-    };
-
-    fetchProfileImage();
+      };
+      fetchProfileImage();
+    }
   }, [user]);
 
   useEffect(() => {
-    const updateProfileImage = async () => {
-      if (user?.uid && imageUrl) {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        if (userDoc.exists() && userDoc.data().profileImage === imageUrl) {
-          return;
-        }
-        await setDoc(
-          doc(db, "users", user.uid),
-          { profileImage: imageUrl },
-          { merge: true }
-        );
-      }
-    };
-
-    updateProfileImage();
+    if (user?.uid && imageUrl) {
+      setDoc(
+        doc(db, "users", user.uid),
+        { profileImage: imageUrl },
+        { merge: true }
+      );
+    }
   }, [imageUrl, user]);
 
   return (

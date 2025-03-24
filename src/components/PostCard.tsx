@@ -1,52 +1,147 @@
+import { useAuth } from "@/context/AuthContext";
+import { db } from "@/firebaseConfig";
+import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import CommentBubble from "./buttons/CommentButton";
+import CommentForm from "./CommentForm";
+import ProfileImage from "./ProfileImage";
 
 interface PostCardProps {
+  id: string;
   username: string;
+  userId: string;
   userProfileImage: string;
   imageUrl: string;
   postDescription: string;
   timestamp: string;
+  postComments: { text: string; username: string }[];
+}
+interface Comment {
+  text: string;
+  username: string;
 }
 
-export default function PostCard({
+const PostCard: React.FC<PostCardProps> = ({
+  id,
   username,
+  userId,
   userProfileImage,
   imageUrl,
   postDescription,
   timestamp,
-}: PostCardProps) {
+  postComments,
+}) => {
+  const [comments, setComments] = useState(postComments || []);
+  const [isCommenting, setIsCommenting] = useState(false);
+  const { user } = useAuth();
+
+  const formattedDate = new Date(timestamp).toLocaleString();
+
+  useEffect(() => {
+    const fetchPostComments = async () => {
+      const postRef = doc(db, "posts", id);
+      const postDoc = await getDoc(postRef);
+
+      if (postDoc.exists()) {
+        const updatedPost = postDoc.data();
+        setComments(updatedPost?.postComments || []);
+      }
+    };
+
+    fetchPostComments();
+  }, [id]);
+
+  const handleAddComment = async (
+    newComment: string | undefined,
+    username: string
+  ) => {
+    if (!newComment || newComment.trim() === "") {
+      console.error("Kommentar är tom!!");
+      return;
+    }
+
+    const commentData = {
+      text: newComment,
+      username: username,
+    };
+
+    const postRef = doc(db, "posts", id);
+
+    try {
+      await updateDoc(postRef, {
+        postComments: arrayUnion(commentData),
+      });
+
+      setComments((prevComments) => [...prevComments, commentData]);
+    } catch (error) {
+      console.error("Fel vid uppdatering av Firestore:", error);
+    }
+  };
+
+  const toggleCommentsVisibility = () => {
+    setIsCommenting((prev) => !prev);
+  };
+
+  const profileLink =
+    user?.uid === userId ? "/user-profile" : `/user-profile/${userId}`;
+
   return (
-    <div className="flex flex-col items-center bg-white rounded-lg shadow-md p-4 mb-4">
-      {/* Profilsektion */}
-      <div className="flex gap-3">
-        <Image
-          src={userProfileImage}
-          alt={`${username}s profilbild`}
-          width={40}
-          height={40}
-          className="rounded-full w-10 h-10"
-        />
-        <div>
-          <p className="font-semibold">{username}</p>
-          <p className="text-sm text-gray-500">
-            {new Date(timestamp).toLocaleString()}
-          </p>
+
+    <>
+      <div className="bg-gray-100 rounded-lg shadow-md p-4 mb-4 font-poppins">
+        {/* Profilsektion */}
+        <div className="flex items-center gap-3">
+          <div className="h-10 m-2">
+            <ProfileImage userId={userId} isEditing={false} />
+          </div>
+          <div>
+            <Link
+              href={profileLink}
+              className="font-semibold text-blue-500 hover:underline"
+            >
+              <p className="font-semibold">@{username}</p>
+            </Link>
+            <p className="text-sm text-gray-500">{formattedDate}</p>
+          </div>
+
         </div>
-      </div>
 
-      {/* Inläggsbild */}
-      <div className="mt-3">
-        <Image
-          src={imageUrl}
-          alt="Post image"
-          width={500}
-          height={500}
-          className="rounded-lg object-cover w-80 h-80 lg:w-[600px] lg:h-[600px] "
-        />
-      </div>
 
-      {/* Beskrivning */}
-      <p className="mt-2 text-gray-800">{postDescription}</p>
-    </div>
+        {/* Inläggsbild */}
+        <div className="mt-3 flex justify-center">
+          <Image
+            src={imageUrl}
+            alt="Post image"
+            width={500}
+            height={500}
+            className="rounded-lg object-cover w-96 h-96 "
+          />
+        </div>
+        <div className="w-8 h-8"></div>
+
+        {/* Beskrivning */}
+        <p className="mt-2 text-gray-800">{postDescription}</p>
+        <CommentBubble comments={comments} />
+
+
+        {/* Formulär för att lägga till en kommentar */}
+
+        {isCommenting && (
+          <CommentForm onAddComment={handleAddComment} username={username} />
+        )}
+
+        {/* Knapp för att visa/öppna kommentarsfältet */}
+        <button
+          onClick={toggleCommentsVisibility}
+          className="mt-4 text-primary hover:text-black"
+        >
+          {isCommenting ? "Dölj kommentarer" : "Lägg till en kommentar"}
+        </button>
+      </div>
+    </>
   );
-}
+};
+
+export default PostCard;

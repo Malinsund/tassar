@@ -1,45 +1,55 @@
 "use client";
-import { useProfile } from "@/context/ProfileContext";
-import { db, storage } from "@/firebaseConfig"; // Importera Firebase-konfigurationen
+import { useAuth } from "@/context/AuthContext";
+import { db, storage } from "@/firebaseConfig";
 import { CameraIcon } from "@heroicons/react/24/outline";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 
-// Komponent för att hantera profilbilden
-export default function ProfileImage({
-  userId,
-  isEditing,
-}: {
+const ProfileImage: FC<{
   userId: string;
   isEditing: boolean;
-}) {
-  const { imageUrl, setImageUrl } = useProfile();
+  size?: number;
+}> = ({ userId, isEditing, size = 32 }) => {
+  const { user } = useAuth();
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  useEffect(() => {
+    if (user?.uid) {
+      const fetchProfileImage = async () => {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          setImageUrl(userDoc.data().profileImage || "/noImage.svg");
+        }
+      };
+      fetchProfileImage();
+    }
+  }, [user]);
+
+  // Hantera filändringar
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setProfileImage(file);
     }
   };
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const triggerFileInput = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
+  // Ladda upp bilden
   const uploadProfileImage = async () => {
-    if (profileImage) {
-      const imageRef = ref(storage, `profile-images/${profileImage.name}`);
+    if (profileImage && user?.uid) {
+      const imageRef = ref(
+        storage,
+        `profile-images/${user.uid}_${profileImage.name}`
+      );
+
       await uploadBytes(imageRef, profileImage);
 
       const url = await getDownloadURL(imageRef);
 
       await setDoc(
-        doc(db, "users", userId),
+        doc(db, "users", user.uid),
         { profileImage: url },
         { merge: true }
       );
@@ -48,13 +58,20 @@ export default function ProfileImage({
     }
   };
 
+  const triggerFileInput = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   return (
-    <div className="">
+    <div>
       {imageUrl ? (
         <img
           src={imageUrl}
           alt="Profilbild"
-          className="rounded-full w-32 h-32 m-4"
+          className="rounded-full object-cover"
+          style={{ width: size, height: size }}
         />
       ) : (
         <div>
@@ -62,6 +79,7 @@ export default function ProfileImage({
           <p>Ingen bild vald</p>
         </div>
       )}
+
       {isEditing && (
         <div className="flex mt-4">
           <button
@@ -79,10 +97,17 @@ export default function ProfileImage({
             className="hidden"
           />
           {profileImage && (
-            <button onClick={uploadProfileImage}>Ladda upp bild</button>
+            <button
+              onClick={uploadProfileImage}
+              className="border-primary border-1 rounded-lg"
+            >
+              Ladda upp bild
+            </button>
           )}
         </div>
       )}
     </div>
   );
-}
+};
+
+export default ProfileImage;

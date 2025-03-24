@@ -11,7 +11,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="flex flex-col gap-4 lg:gap-0 lg:flex-row justify-between mx-10 mb-4 font-special text-2xl">
+    <div className="flex flex-col gap-4 lg:gap-0 lg:flex-row justify-between mx-10 mb-4 font-special text-2xl ">
       <div className={`nav p-2 ${isActive("/posts")}`}>
         <Link href={"/posts"}>
           <h2>Flöde</h2>

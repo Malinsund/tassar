@@ -11,7 +11,7 @@ export default function Home() {
 
   useEffect(() => {
     if (user) {
-      router.push("/posts");
+      router.replace("/posts");
     }
   }, [user, router]);
 
@@ -19,7 +19,6 @@ export default function Home() {
     e.preventDefault();
     try {
       await login(email, password);
-      router.push("/posts");
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -35,17 +34,7 @@ export default function Home() {
         Ett samlat community för alla djurälskare
       </h1>
 
-      {user ? (
-        <div>
-          <button
-            onClick={logout}
-            className="bg-red-500 text-white px-4 py-2 rounded"
-          >
-            Logga ut
-          </button>
-        </div>
-      ) : (
-        // Om användaren inte är inloggad, visa login-formulär
+      {!user && (
         <div className="mt-4">
           <form onSubmit={handleLogin} className="flex flex-col items-center">
             <input
