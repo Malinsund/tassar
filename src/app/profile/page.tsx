@@ -120,7 +120,7 @@ export default function ProfilePage() {
   if (!user) {
     return (
       <div className="flex flex-col justify-center align-middle items-center">
-        <img src="/tassar.svg" alt="" />
+        <img src="/tassar.svg" alt="tassar logo" />
         <p className="text-center m-4 text-xl font-special">
           Logga in för att se din profil
         </p>
@@ -135,15 +135,16 @@ export default function ProfilePage() {
   }
 
   return (
-    <div>
+    <div className="">
       <Header />
       <div className="hidden lg:block">
         <Navbar />
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-4 lg:grid-rows-6 gap-2">
-        <div className="flex flex-col justify-center text-center items-center bg-slate-300 col-span-1 p-4 gap-2 lg:row-span-3">
+      <div className="grid grid-cols-1 lg:grid-cols-4 lg:h-screen gap-2">
+        {/* Profilinformation */}
+        <div className="flex flex-col text-center items-center col-span-1 p-4 gap-4 ">
           <div className="">
-            <ProfileImage userId={user.uid} isEditing={isEditing} size={120} />
+            <ProfileImage userId={user.uid} isEditing={isEditing} size={240} />
           </div>
           {username && <h2 className="text-2xl font-bold">@{username}</h2>}
 
@@ -151,7 +152,7 @@ export default function ProfilePage() {
             {isEditing ? (
               <div>
                 <textarea
-                  className="rounded-lg border-grey10 w-56 h-24 p-2"
+                  className="rounded-lg border-grey10 w-56 h-24 lg:w-72 p-2"
                   value={newDescription}
                   onChange={(e) => setNewDescription(e.target.value)}
                 />
@@ -161,7 +162,7 @@ export default function ProfilePage() {
             )}
           </div>
 
-          <div className="flex gap-8">
+          <div className="flex lg:mt-8 gap-8">
             <PrimaryButton
               onClick={() => {
                 if (isEditing) {
@@ -171,6 +172,7 @@ export default function ProfilePage() {
                 setIsEditing(!isEditing);
               }}
               text={isEditing ? "Spara" : "Redigera profil"}
+              className="lg:place-content-end"
             />
 
             <div className="lg:hidden">
@@ -179,10 +181,11 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        <div className="bg-blue-100 col-span-2">
+        {/* Bilder */}
+        <div className="border-y-2 lg:border-y-0 lg:border-x-2 p-2 col-span-2 lg:flex-grow h-full">
           <h1>bilder</h1>
           {/* bild containern */}
-          <div className="grid grid-cols-4  gap-2">
+          <div className="grid grid-cols-4 gap-2">
             {userImages.map((image, index) => (
               <div key={index} className="relative m-2">
                 {/* "X"-knappen visas bara i redigeringsläge */}
@@ -231,7 +234,7 @@ export default function ProfilePage() {
           </div>
         )}
 
-        <div className="bg-pink-300 col-span-1 hidden lg:block">
+        <div className=" col-span-1 hidden lg:block ">
           <h1>meddelanden</h1>
           {/* meddelande containern vid stort fönster */}
         </div>

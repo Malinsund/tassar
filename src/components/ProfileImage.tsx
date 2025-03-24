@@ -81,10 +81,10 @@ const ProfileImage: FC<{
       )}
 
       {isEditing && (
-        <div className="flex mt-4">
+        <div className="flex flex-col mt-4">
           <button
             onClick={triggerFileInput}
-            className="text-gray-600 hover:text-gray-800"
+            className="flex justify-center text-gray-600 hover:text-gray-800 "
           >
             <CameraIcon className="w-8 h-8" />
           </button>
@@ -99,7 +99,7 @@ const ProfileImage: FC<{
           {profileImage && (
             <button
               onClick={uploadProfileImage}
-              className="border-primary border-1 rounded-lg"
+              className="border-primary border-2 p-2 rounded-lg"
             >
               Ladda upp bild
             </button>
