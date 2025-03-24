@@ -17,16 +17,14 @@ export default function Header() {
         {/* <img src="/Pawprints.jpg" alt="love" /> */}
       </div>
       <div className="lg:hidden">
-
         <button onClick={() => setIsOpen(true)} className="text-black">
-
           <Bars3Icon className="w-8 h-8 cursor-pointer" />
         </button>
       </div>
 
       <div className="w-32 h-28 lg:w-60 lg:h-44">
         {/* <h1 className="font-special text-6xl m-4 lg:m-20 z-20">Tassar</h1> */}
-        <img src="/tassar.svg" alt="" />
+        <img src="/tassar.svg" alt="website logo" />
       </div>
 
       <div
@@ -39,7 +37,6 @@ export default function Header() {
       {/* Hamburgermeny med slide-in effekt */}
       <div
         className={`fixed top-0 left-0 h-screen w-3/4 z-50 bg-white shadow-lg lg:hidden transform transition-transform duration-300 ${
-
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >

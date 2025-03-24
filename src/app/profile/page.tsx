@@ -140,8 +140,8 @@ export default function ProfilePage() {
       <div className="hidden lg:block">
         <Navbar />
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
-        <div className="flex flex-col justify-center text-center items-center bg-slate-300 col-span-1 p-4 gap-2">
+      <div className="grid grid-cols-1 lg:grid-cols-4 lg:grid-rows-6 gap-2">
+        <div className="flex flex-col justify-center text-center items-center bg-slate-300 col-span-1 p-4 gap-2 lg:row-span-3">
           <div className="">
             <ProfileImage userId={user.uid} isEditing={isEditing} size={120} />
           </div>

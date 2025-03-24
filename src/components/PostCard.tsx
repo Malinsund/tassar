@@ -87,7 +87,6 @@ const PostCard: React.FC<PostCardProps> = ({
   const profileLink = user?.uid === userId ? "/profile" : `/profile/${userId}`;
 
   return (
-
     <>
       <div className="bg-gray-100 rounded-lg shadow-md p-4 mb-4 font-poppins">
         {/* Profilsektion */}
@@ -98,21 +97,19 @@ const PostCard: React.FC<PostCardProps> = ({
           <div>
             <Link
               href={profileLink}
-              className="font-semibold text-blue-500 hover:underline"
+              className="font-semibold text-black hover:underline"
             >
               <p className="font-semibold">@{username}</p>
             </Link>
             <p className="text-sm text-gray-500">{formattedDate}</p>
           </div>
-
         </div>
-
 
         {/* Inläggsbild */}
         <div className="mt-3 flex justify-center">
           <Image
             src={imageUrl}
-            alt="Post image"
+            alt="users postimage"
             width={500}
             height={500}
             className="rounded-lg object-cover w-96 h-96 "
@@ -123,7 +120,6 @@ const PostCard: React.FC<PostCardProps> = ({
         {/* Beskrivning */}
         <p className="mt-2 text-gray-800">{postDescription}</p>
         <CommentBubble comments={comments} />
-
 
         {/* Formulär för att lägga till en kommentar */}
 
