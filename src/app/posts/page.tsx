@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 interface Post {
   id: string;
   username: string;
+  userId: string;
   userProfileImage: string;
   imageUrl: string;
   description: string;
@@ -36,6 +37,7 @@ export default function PostPage() {
       const posts = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         username: doc.data().username,
+        userId: doc.data().userId,
         userProfileImage: doc.data().userProfileImage,
         imageUrl: doc.data().imageUrl,
         description: doc.data().description,
@@ -89,7 +91,7 @@ export default function PostPage() {
               key={post.id}
               id={post.id}
               username={post.username}
-              userId={post.id}
+              userId={post.userId}
               userProfileImage={post.userProfileImage}
               imageUrl={post.imageUrl}
               postDescription={post.description}

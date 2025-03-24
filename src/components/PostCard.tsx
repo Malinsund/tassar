@@ -84,8 +84,7 @@ const PostCard: React.FC<PostCardProps> = ({
     setIsCommenting((prev) => !prev);
   };
 
-  const profileLink =
-    user?.uid === userId ? "/user-profile" : `/user-profile/${userId}`;
+  const profileLink = user?.uid === userId ? "/profile" : `/profile/${userId}`;
 
   return (
     <>

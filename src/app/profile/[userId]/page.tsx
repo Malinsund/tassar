@@ -4,7 +4,14 @@ import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import ProfileImage from "@/components/ProfileImage";
 import { db } from "@/firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { use, useEffect, useState } from "react";
 
 export default function UserProfile({
@@ -20,6 +27,8 @@ export default function UserProfile({
 
   useEffect(() => {
     const fetchUserProfile = async () => {
+      console.log("Användarens ID:", userId);
+
       if (userId) {
         try {
           const userDoc = await getDoc(doc(db, "users", userId));
@@ -28,11 +37,23 @@ export default function UserProfile({
             setUsername(data.username || "Okänd användare");
             setDescription(data.description || "");
             setProfileImage(data.profileImage || null);
-
-            // setUserImages(data.images || []);
           } else {
             console.log("Användaren finns inte.");
           }
+
+          const postsQuery = query(
+            collection(db, "posts"),
+            where("userId", "==", userId)
+          );
+          const querySnapshot = await getDocs(postsQuery);
+          const images: string[] = [];
+          querySnapshot.forEach((doc) => {
+            const postData = doc.data();
+            if (postData.imageUrl) {
+              images.push(postData.imageUrl);
+            }
+          });
+          setUserImages(images);
         } catch (error) {
           console.error("Fel vid hämtning av användardata:", error);
         }
@@ -63,7 +84,7 @@ export default function UserProfile({
                 <img
                   src={image}
                   alt={`User Image ${index}`}
-                  className="w-32 h-32 object-cover rounded-lg"
+                  className="w-32 h-32 object-cover rounded-lg m-2"
                 />
               </div>
             ))}
