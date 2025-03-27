@@ -1,30 +1,66 @@
-import React from "react";
+import { db } from "@/firebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 interface Thread {
   id: string;
   title: string;
+  content: string;
+  category: string;
 }
 
-const ThreadList: React.FC<{
-  threads: Thread[];
-  onSelect: (threadId: string) => void;
-}> = ({ threads, onSelect }) => {
+interface Props {
+  selectedCategory: string;
+  onThreadSelect: (thread: Thread) => void;
+  activeThreadId: string | null;
+}
+
+export default function ThreadList({
+  selectedCategory,
+  onThreadSelect,
+  activeThreadId,
+}: Props) {
+  const [threads, setThreads] = useState<Thread[]>([]);
+
+  useEffect(() => {
+    console.log("Hämtar trådar för kategori:", selectedCategory);
+    const fetchThreads = async () => {
+      if (!selectedCategory) return;
+
+      const q = query(
+        collection(db, "forumThreads"),
+        where("category", "==", selectedCategory)
+      );
+      const querySnapshot = await getDocs(q);
+      const fetchedThreads = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Thread[];
+
+      setThreads(fetchedThreads);
+    };
+
+    fetchThreads();
+  }, [selectedCategory]);
+
   return (
-    <div className="bg-green-300 p-4">
-      <h1 className="text-2xl font-bold">Trådar</h1>
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-2">Trådar i {selectedCategory}</h2>
       <ul>
         {threads.map((thread) => (
           <li
             key={thread.id}
-            onClick={() => onSelect(thread.id)}
-            className="cursor-pointer p-2 hover:bg-green-400"
+            onClick={() => onThreadSelect(thread)}
+            className={`cursor-pointer p-2 mb-1 rounded ${
+              activeThreadId === thread.id
+                ? "bg-blue-400 text-white text-lg"
+                : "bg-gray-200"
+            }`}
           >
-            {thread.title}
+            "{thread.title}"
           </li>
         ))}
       </ul>
     </div>
   );
-};
-
-export default ThreadList;
+}

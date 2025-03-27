@@ -23,14 +23,6 @@ export default function ProfilePage() {
   const [newDescription, setNewDescription] = useState(description || "");
   const router = useRouter();
   const conversations = useConversations();
-  const [selectedConversation, setSelectedConversation] = useState<
-    string | null
-  >(null);
-
-  const handleConversationClick = (conversationId: string) => {
-    console.log("Selected conversation ID:", selectedConversation);
-    setSelectedConversation(conversationId);
-  };
 
   const handleDeleteImage = async () => {
     if (selectedImage) {
@@ -63,7 +55,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="">
+    <div>
       <Header />
       <div className="hidden lg:block">
         <Navbar />
@@ -71,52 +63,39 @@ export default function ProfilePage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 lg:h-screen gap-2">
         {/* Profilinformation */}
         <div className="flex flex-col text-center items-center col-span-1 p-4 gap-4 ">
-          <div className="">
-            <ProfileImage userId={user.uid} isEditing={isEditing} size={240} />
-          </div>
+          <ProfileImage userId={user.uid} isEditing={isEditing} size={240} />
           {username && <h2 className="text-2xl font-bold">@{username}</h2>}
-
           <div>
             {isEditing ? (
-              <div>
-                <textarea
-                  className="rounded-lg border-grey10 w-56 h-24 lg:w-72 p-2"
-                  value={newDescription}
-                  onChange={(e) => setNewDescription(e.target.value)}
-                />
-              </div>
+              <textarea
+                className="rounded-lg border-grey10 w-56 h-24 lg:w-72 p-2"
+                value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+              />
             ) : (
               <p>{description || "Ingen beskrivning satt"}</p>
             )}
           </div>
-
           <div className="flex lg:mt-8 gap-8">
             <PrimaryButton
               onClick={() => {
                 if (isEditing) {
                   saveAllChanges();
                 }
-
                 setIsEditing(!isEditing);
               }}
               text={isEditing ? "Spara" : "Redigera profil"}
               className="lg:place-content-end"
             />
-
-            <div className="lg:hidden">
-              <PrimaryButton text={"Meddelanden"} />
-            </div>
           </div>
         </div>
 
         {/* Bilder */}
         <div className="border-y-2 lg:border-y-0 lg:border-x-2 p-2 col-span-2 lg:flex-grow h-full">
           <h1>bilder</h1>
-          {/* bild containern */}
           <div className="grid grid-cols-4 gap-2">
             {userImages.map((image, index) => (
               <div key={index} className="relative m-2">
-                {/* "X"-knappen visas bara i redigeringsläge */}
                 {isEditing && (
                   <button
                     className="absolute -top-2 -right-2 "
@@ -137,33 +116,38 @@ export default function ProfilePage() {
             ))}
           </div>
         </div>
-        {showConfirm && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-4 rounded shadow-lg text-center">
-              <p className="text-xl font-special">
-                Är du säker på att du vill ta bort denna bild?
-              </p>
-              <p className="font-poppins">Denna åtgärd går inte att ångra</p>
-              <div className="flex justify-center gap-4 mt-4">
-                <button
-                  onClick={handleDeleteImage}
-                  className="bg-destructive text-white font-special px-4 py-2 rounded"
-                >
-                  Ja, ta bort
-                </button>
-                <button
-                  onClick={() => setShowConfirm(false)}
-                  className="bg-grey50 text-white px-4 py-2 rounded"
-                >
-                  Avbryt
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
 
-        <div className=" col-span-1 hidden lg:block ">
-          <h1>meddelanden</h1>
+        {/* Meddelanden */}
+        <div className="col-span-1 lg:col-span-1 lg:block p-4">
+          <h2 className="text-xl font-bold">Meddelanden</h2>
         </div>
       </div>
+
+      {/* Bekräftelse för att ta bort bild */}
+      {showConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-4 rounded shadow-lg text-center">
+            <p className="text-xl font-special">
+              Är du säker på att du vill ta bort denna bild?
+            </p>
+            <p className="font-poppins">Denna åtgärd går inte att ångra</p>
+            <div className="flex justify-center gap-4 mt-4">
+              <button
+                onClick={handleDeleteImage}
+                className="bg-destructive text-white font-special px-4 py-2 rounded"
+              >
+                Ja, ta bort
+              </button>
+              <button
+                onClick={() => setShowConfirm(false)}
+                className="bg-grey50 text-white px-4 py-2 rounded"
+              >
+                Avbryt
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+  );
+}
