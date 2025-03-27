@@ -1,130 +1,47 @@
 "use client";
-
 import PrimaryButton from "@/components/buttons/PrimaryButton";
-
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import ProfileImage from "@/components/ProfileImage";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
-import { db } from "@/firebaseConfig";
+import { useConversations } from "@/hooks/useConversations";
+import { useUserData } from "@/hooks/useUserData";
+import { useUserImages } from "@/hooks/useUserImages";
 import { XCircleIcon } from "@heroicons/react/24/outline";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-
-interface Conversation {
-  id: string;
-  user1Id: string;
-  user2Id: string;
-  lastMessage?: string;
-  lastTimestamp?: { seconds: number };
-  otherUsername?: string;
-}
+import { useState } from "react";
 
 export default function ProfilePage() {
   const { user } = useAuth();
   const { imageUrl, setImageUrl } = useProfile();
-  const [description, setDescription] = useState<string | null>(null);
-  const [username, setUsername] = useState<string | null>(null);
+  const { username, description, setDescription } = useUserData(user?.uid);
+  const { userImages, deleteUserImage } = useUserImages(user?.uid);
   const [isEditing, setIsEditing] = useState(false);
-  const [userImages, setUserImages] = useState<string[]>([]);
-  const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [newDescription, setNewDescription] = useState(description || "");
-  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const router = useRouter();
+  const conversations = useConversations();
+  const [selectedConversation, setSelectedConversation] = useState<
+    string | null
+  >(null);
 
-  // Hämta användardata vid inladdning
-  useEffect(() => {
-    const getUserData = async () => {
-      if (user?.uid) {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        if (userDoc.exists()) {
-          const data = userDoc.data();
-          setImageUrl(data.profileImage || null);
-          setDescription(data.description || null);
-          setUsername(data.username || "Användarnamn inte tillgängligt"); // Fyll i användarnamn
-        } else {
-          console.log("Användardokumentet finns inte.");
-        }
-      }
-    };
-
-    getUserData();
-  }, [user]);
-  useEffect(() => {
-    setNewDescription(description || "");
-  }, [description]);
-
-  useEffect(() => {
-    const getUserImages = async () => {
-      if (user?.uid) {
-        const postsQuery = query(
-          collection(db, "posts"),
-          where("userId", "==", user.uid)
-        );
-        const querySnapshot = await getDocs(postsQuery);
-        const images: string[] = [];
-        querySnapshot.forEach((doc) => {
-          const postData = doc.data();
-          if (postData.imageUrl) {
-            images.push(postData.imageUrl);
-          }
-        });
-        setUserImages(images);
-      }
-    };
-
-    getUserImages();
-  }, [user]);
+  const handleConversationClick = (conversationId: string) => {
+    console.log("Selected conversation ID:", selectedConversation);
+    setSelectedConversation(conversationId);
+  };
 
   const handleDeleteImage = async () => {
-    if (selectedImage && user?.uid) {
-      try {
-        const postsQuery = query(
-          collection(db, "posts"),
-          where("userId", "==", user.uid),
-          where("imageUrl", "==", selectedImage)
-        );
-        const querySnapshot = await getDocs(postsQuery);
-        querySnapshot.forEach(async (docSnapshot) => {
-          await deleteDoc(doc(db, "posts", docSnapshot.id));
-        });
-
-        setUserImages(userImages.filter((img) => img !== selectedImage));
-        setShowConfirm(false);
-      } catch (error) {
-        console.error("Fel vid radering:", error);
-      }
+    if (selectedImage) {
+      await deleteUserImage(selectedImage);
+      setShowConfirm(false);
     }
   };
-  const saveAllChanges = async () => {
-    console.log("saveAllChanges called");
-    if (isEditing) {
-      console.log("Saving description: ", newDescription);
-      await setDoc(
-        doc(db, "users", user?.uid || ""),
-        { description: newDescription },
-        { merge: true }
-      );
 
-      /* if (imageUrl) {
-        await setDoc(
-          doc(db, "users", user?.uid || ""),
-          { profileImage: imageUrl },
-          { merge: true }
-        );
-      } */
+  const saveAllChanges = async () => {
+    if (isEditing) {
+      await setDescription(newDescription);
     }
   };
 
@@ -250,5 +167,3 @@ export default function ProfilePage() {
         </div>
       </div>
     </div>
-  );
-}
