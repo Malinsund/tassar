@@ -1,6 +1,7 @@
 "use client";
 
 import PrimaryButton from "@/components/buttons/PrimaryButton";
+
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import ProfileImage from "@/components/ProfileImage";
@@ -21,6 +22,15 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+interface Conversation {
+  id: string;
+  user1Id: string;
+  user2Id: string;
+  lastMessage?: string;
+  lastTimestamp?: { seconds: number };
+  otherUsername?: string;
+}
+
 export default function ProfilePage() {
   const { user } = useAuth();
   const { imageUrl, setImageUrl } = useProfile();
@@ -32,6 +42,7 @@ export default function ProfilePage() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [newDescription, setNewDescription] = useState(description || "");
+  const [conversations, setConversations] = useState<Conversation[]>([]);
 
   // Hämta användardata vid inladdning
   useEffect(() => {
@@ -236,7 +247,6 @@ export default function ProfilePage() {
 
         <div className=" col-span-1 hidden lg:block ">
           <h1>meddelanden</h1>
-          {/* meddelande containern vid stort fönster */}
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
@@ -10,6 +11,7 @@ export default function Header() {
   const { imageUrl } = useProfile();
   const [isOpen, setIsOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const { user } = useAuth();
 
   return (
     <div className="flex justify-between lg:w-screen p-4 lg:p-8">
@@ -67,8 +69,14 @@ export default function Header() {
           </button>
         </div>
 
-        <div className="p-4 text-white">
-          <h2>En rappikalja som tittar</h2>
+        <div className="p-2 text-white">
+          <div className="flex items-center font-bold">
+            <div className="rounded-full w-10">
+              <ProfileImageView imageUrl={imageUrl} />
+            </div>
+            <p>{user?.username}</p>
+          </div>
+
           <div className="hidden lg:block">
             <LogoutButton />
           </div>
