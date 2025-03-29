@@ -1,6 +1,8 @@
 import { db } from "@/firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
+import PrimaryButton from "../Buttons/PrimaryButton";
+import SecondaryButton from "../Buttons/SecondaryButton";
 
 interface Props {
   isOpen: boolean;
@@ -79,15 +81,18 @@ export default function NewThreadModal({ isOpen, onClose }: Props) {
           ))}
         </select>
         <div className="flex justify-end gap-2">
-          <button onClick={onClose} className="px-4 py-2 bg-gray-300 rounded">
-            Avbryt
-          </button>
-          <button
+          <SecondaryButton
+            onClick={onClose}
+            className="px-4 py-2
+           rounded"
+            text="Avbryt"
+          />
+
+          <PrimaryButton
             onClick={handleSave}
-            className="px-4 py-2 bg-blue-500 text-white rounded"
-          >
-            Spara
-          </button>
+            className="px-4 py-2 text-white rounded"
+            text="Spara"
+          />
         </div>
       </div>
     </div>

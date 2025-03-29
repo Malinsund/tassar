@@ -45,16 +45,18 @@ export default function ThreadList({
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold mb-2">Trådar i {selectedCategory}</h2>
+      <h2 className="text-3xl font-special font-bold mb-2">
+        Trådar i {selectedCategory}
+      </h2>
       <ul>
         {threads.map((thread) => (
           <li
             key={thread.id}
             onClick={() => onThreadSelect(thread)}
-            className={`cursor-pointer p-2 mb-1 rounded ${
+            className={`cursor-pointer p-2 font-poppins rounded ${
               activeThreadId === thread.id
-                ? "bg-blue-400 text-white text-lg"
-                : "bg-gray-200"
+                ? " text-white text-2xl font-semibold"
+                : " text-lg font-semibold"
             }`}
           >
             "{thread.title}"

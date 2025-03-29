@@ -9,8 +9,8 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { useState } from "react";
-import PrimaryButton from "./buttons/PrimaryButton";
-import SecondaryButton from "./buttons/SecondaryButton";
+import PrimaryButton from "../Buttons/PrimaryButton";
+import SecondaryButton from "../Buttons/SecondaryButton";
 
 interface PostModalProps {
   isOpen: boolean;

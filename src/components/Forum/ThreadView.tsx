@@ -8,6 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import PrimaryButton from "../Buttons/PrimaryButton";
 
 interface Thread {
   id: string;
@@ -19,7 +20,7 @@ interface Thread {
 interface Reply {
   id: string;
   content: string;
-  createdAt: Timestamp; // Här använder vi Timestamp istället för Date
+  createdAt: Timestamp;
 }
 
 interface Props {
@@ -76,14 +77,13 @@ export default function ThreadView({ thread }: Props) {
       )}
 
       <div className="flex-grow overflow-y-auto mb-4">
-        <h3 className="text-xl font-semibold mb-2">Svar:</h3>
+        {/* <h3 className="text-xl font-semibold underline mb-2"></h3> */}
         <ul className="space-y-2">
           {replies.map((reply) => (
             <li key={reply.id} className="p-2 bg-gray-100 rounded">
               <p>{reply.content}</p>
               <p className="text-sm text-gray-500">
                 Postat: {reply.createdAt.toDate().toLocaleString()}{" "}
-                {/* Här använder vi toDate() på Timestamp */}
               </p>
             </li>
           ))}
@@ -91,20 +91,18 @@ export default function ThreadView({ thread }: Props) {
       </div>
 
       <div className="mt-4 border-t pt-4">
-        <h3 className="text-xl font-semibold mb-2">Skriv ett svar</h3>
         <textarea
           placeholder="Skriv ditt svar här..."
           value={replyContent}
           onChange={(e) => setReplyContent(e.target.value)}
           className="w-full border p-2 mb-2"
-          rows={4}
+          rows={2}
         />
-        <button
+        <PrimaryButton
           onClick={handleReplySubmit}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Skicka svar
-        </button>
+          className="px-4 py-2 text-white rounded"
+          text="svara"
+        />
       </div>
     </div>
   );

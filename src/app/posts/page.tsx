@@ -1,8 +1,8 @@
 "use client";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
-import PostCard from "@/components/PostCard";
-import PostModal from "@/components/PostModal";
+import PostCard from "@/components/Posts/PostCard";
+import PostModal from "@/components/Posts/PostModal";
 import { useProfile } from "@/context/ProfileContext";
 import { db } from "@/firebaseConfig";
 import { PlusIcon } from "@heroicons/react/24/outline";
@@ -75,7 +75,6 @@ export default function PostPage() {
           <div className="sticky top-0 flex justify-center z-30">
             <button
               onClick={() => setIsModalOpen(true)}
-
               className="bg-greyopac text-black p-2 text-center place-items-center  w-full"
             >
               <PlusIcon className="w-8 h-8" />
@@ -87,7 +86,6 @@ export default function PostPage() {
               onPostAdded={handlePostAdded}
             />
           </div>
-
 
           {posts.map((post) => (
             <PostCard

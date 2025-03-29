@@ -1,10 +1,11 @@
 "use client";
-import CategoryList from "@/components/CategoryList";
+import CategoryList from "@/components/Forum/CategoryList";
+import NewThreadModal from "@/components/Forum/NewThreadModal";
+import ThreadList from "@/components/Forum/ThreadList";
+import ThreadView from "@/components/Forum/ThreadView";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
-import NewThreadModal from "@/components/newThreadModal";
-import ThreadList from "@/components/ThreadList";
-import ThreadView from "@/components/ThreadView";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
 export default function Forum() {
@@ -18,24 +19,24 @@ export default function Forum() {
       <div className="hidden lg:block">
         <Navbar />
       </div>
-      <div className="grid lg:grid-cols-6 gap-2 m-2">
-        <div className="bg-blue-300 lg:col-span-2">
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="rounded-full p-2 w-10 h-10 m-4 border-2"
-          >
-            +
-          </button>
-          <input type="search" />
+      <div className="grid lg:grid-cols-8 gap-2 m-2">
+        <div className="flex justify-between p-4 bg-blue-300 lg:col-span-2">
           <CategoryList
             onCategorySelect={(category) => {
               setSelectedCategory(category);
               setActiveThread(null);
             }}
           />
+          <div className="p-2">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="rounded-full p-2 w-12"
+            >
+              <PencilSquareIcon />
+            </button>
+          </div>
         </div>
         <div className="bg-cyan-600 lg:col-span-2">
-          <h1 className="text-3xl font-special">Trådar</h1>
           {selectedCategory && (
             <ThreadList
               selectedCategory={selectedCategory}
@@ -44,7 +45,7 @@ export default function Forum() {
             />
           )}
         </div>
-        <div className="bg-sky-600 lg:col-span-2 overflow-y-auto">
+        <div className="bg-sky-600 lg:col-span-4 overflow-y-auto">
           {activeThread ? (
             <ThreadView thread={activeThread} />
           ) : (
