@@ -1,0 +1,21 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main # eller den branch du vill använda för att trigga deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Firebase CLI
+        uses: wzieba/Firebase-Tools-Github-Action@v0.2.0
+        with:
+          firebase_token: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+
+      - name: Deploy to Firebase Hosting
+        run: firebase deploy --only hosting --token ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}

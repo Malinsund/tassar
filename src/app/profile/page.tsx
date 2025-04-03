@@ -62,10 +62,14 @@ export default function ProfilePage() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 lg:h-screen gap-2">
         {/* Profilinformation */}
-        <div className="flex flex-col text-center items-center col-span-1 p-4 gap-4 ">
-          <ProfileImage userId={user.uid} isEditing={isEditing} size={240} />
-          {username && <h2 className="text-2xl font-bold">@{username}</h2>}
-          <div>
+        <div className="flex flex-col items-center col-span-1 p-4 gap-2 lg:gap-4">
+          <ProfileImage userId={user.uid} isEditing={isEditing} size={200} />
+          {username && (
+            <h2 className="text-2xl font-bold self-start lg:self-center text-left lg:text-center">
+              @{username}
+            </h2>
+          )}
+          <div className="text-left lg:text-center">
             {isEditing ? (
               <textarea
                 className="rounded-lg border-grey10 w-56 h-24 lg:w-72 p-2"

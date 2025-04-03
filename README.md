@@ -51,8 +51,8 @@ För att få Godkänt (G) på examensarbetet måste samtliga kursmål och krav u
 
 ### Planering och Research
 
-- [ ] Utföra en noggrann målgruppsanalys.
-- [ ] Använda ett projekthanteringsverktyg för backlog, t.ex. Trello eller Kanban.
+- [ x ] Utföra en noggrann målgruppsanalys.
+- [ x] Använda ett projekthanteringsverktyg för backlog, t.ex. Trello eller Kanban.
 
 ### Design och Prototyping
 
@@ -61,16 +61,16 @@ För att få Godkänt (G) på examensarbetet måste samtliga kursmål och krav u
 
 ### Applikationsutveckling
 
-- [ ] Utveckla med ett modernt JavaScript-ramverk.
-- [ ] Använd en databas för lagring och hämtning av data.
-- [ ] Implementera state-hantering och skapa dynamiska komponenter med reaktivitet och interaktivitet.
-- [ ] Följa WCAG 2.1-standarder och använda semantisk HTML.
-- [ ] **För webbapp**: Produkten ska vara responsiv och fungera korrekt på minst två skärmstorlekar (mobil och dator).
+- [x] Utveckla med ett modernt JavaScript-ramverk.
+- [x] Använd en databas för lagring och hämtning av data.
+- [x] Implementera state-hantering och skapa dynamiska komponenter med reaktivitet och interaktivitet.
+- [x] Följa WCAG 2.1-standarder och använda semantisk HTML.
+- [x] **För webbapp**: Produkten ska vara responsiv och fungera korrekt på minst två skärmstorlekar (mobil och dator).
 - [ ] **För native mobilapp**: Produkten ska anpassas till olika skärmstorlekar och enhetsorienteringar (porträtt och landskap).
 
 ### Versionshantering
 
-- [ ] Arbeta med Git och ha ett repo på GitHub.
+- [x] Arbeta med Git och ha ett repo på GitHub.
 
 ### Slutrapport
 
@@ -102,7 +102,7 @@ För att få Väl Godkänt (VG) krävs en djupare förståelse, professionell kv
 - [ ] Koden följer, utan undantag, WCAG 2.1-standarder för nivå A och AA.
 - [ ] **Optimering**: Produkten ska vara optimerad genom återanvändning av kod och komponenter samt användning av optimeringstekniker där det behövs.
 - [ ] **CRUD-operationer**: Implementera Create, Read, Update, Delete med säker hantering av användardata.
-- [ ] **Säker autentisering**: Implementera OAuth, JWT eller Firebase Authentication för att säkerställa att endast behöriga användare kan hantera data.
+- [ x ] **Säker autentisering**: Implementera OAuth, JWT eller Firebase Authentication för att säkerställa att endast behöriga användare kan hantera data.
 - [ ] **För webbapp**: Produkten ska vara fullt responsiv och dynamiskt anpassa sig till olika skärmstorlekar och enheter.
 
 ### Versionshantering
