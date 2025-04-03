@@ -12,11 +12,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Test GOOGLE_APPLICATION_CREDENTIALS secret
-        run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}"
-
       - name: Set up Firebase CLI
-        uses: wzieba/Firebase-Tools-Github-Action@v0.3.0
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           firebase_token: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
