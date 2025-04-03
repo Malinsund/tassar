@@ -2,8 +2,8 @@ import { db } from "@/firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 
-import PrimaryButton from "@/components/Buttons/PrimaryButton";
-import SecondaryButton from "@/components/Buttons/SecondaryButton";
+import PrimaryButton from "@/components/PrimaryButton";
+import SecondaryButton from "@/components/SecondaryButton";
 
 interface Props {
   isOpen: boolean;

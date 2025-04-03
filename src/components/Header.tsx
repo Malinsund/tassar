@@ -1,5 +1,5 @@
 "use client";
-import LogoutButton from "@/components/Buttons/LogoutButton";
+import LogoutButton from "@/components/LogoutButton";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";

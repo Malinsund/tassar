@@ -1,8 +1,8 @@
 "use client";
 
-import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
+import PrimaryButton from "@/components/PrimaryButton";
 import ProfileImage from "@/components/ProfileImage";
 import { useAuth } from "@/context/AuthContext";
 import { useUserData } from "@/hooks/useUserData";

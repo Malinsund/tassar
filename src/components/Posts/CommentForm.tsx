@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PrimaryButton from "../Buttons/PrimaryButton";
+import PrimaryButton from "../PrimaryButton";
 
 const CommentForm = ({
   onAddComment,

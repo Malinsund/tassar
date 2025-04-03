@@ -9,8 +9,8 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { useState } from "react";
-import PrimaryButton from "../Buttons/PrimaryButton";
-import SecondaryButton from "../Buttons/SecondaryButton";
+import PrimaryButton from "../PrimaryButton";
+import SecondaryButton from "../SecondaryButton";
 
 interface Post {
   id: string;

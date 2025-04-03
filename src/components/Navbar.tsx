@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import LogoutButton from "./Buttons/LogoutButton";
+import LogoutButton from "./LogoutButton";
 
 export default function Navbar() {
   const pathname = usePathname();

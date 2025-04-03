@@ -1,4 +1,4 @@
-import PrimaryButton from "@/components/Buttons/PrimaryButton";
+import PrimaryButton from "@/components/PrimaryButton";
 import { db } from "@/firebaseConfig";
 import {
   addDoc,
