@@ -59,7 +59,7 @@ export default function ThreadList({
                 : " text-lg font-semibold"
             }`}
           >
-            "{thread.title}"
+            &quot;{thread.title}&quot;
           </li>
         ))}
       </ul>

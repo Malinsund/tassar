@@ -18,16 +18,12 @@ interface PostCardProps {
   timestamp: string;
   postComments: { text: string; username: string }[];
 }
-interface Comment {
-  text: string;
-  username: string;
-}
 
 const PostCard: React.FC<PostCardProps> = ({
   id,
   username,
   userId,
-  userProfileImage,
+
   imageUrl,
   postDescription,
   timestamp,

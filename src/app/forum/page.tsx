@@ -7,11 +7,17 @@ import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+interface Thread {
+  id: string;
+  title: string;
+  content: string;
+  category: string;
+}
 
 export default function Forum() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [activeThread, setActiveThread] = useState<any>(null);
+  const [activeThread, setActiveThread] = useState<Thread | null>(null);
 
   return (
     <div className="max-h-screen">

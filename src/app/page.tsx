@@ -1,10 +1,11 @@
 "use client";
 import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const { user, login, logout } = useAuth();
+  const { user, login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-center text-center ">
       <div className="flex justify-center p-4">
-        <img src="/tassar.svg" alt="icon" />
+        <Image src="/tassar.svg" alt="icon" width={200} height={200} />
       </div>
       <h1 className="font-special text-2xl">
         Välkommen till Tassar! <br />

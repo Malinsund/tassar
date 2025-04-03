@@ -2,6 +2,7 @@
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import { useState } from "react";
 import LogoutButton from "./Buttons/LogoutButton";
 import Navbar from "./Navbar";
@@ -15,9 +16,6 @@ export default function Header() {
 
   return (
     <div className="flex justify-between lg:w-screen p-4 lg:p-8">
-      {/* <div className="hidden lg:block w-36 h-36 -z-10">
-         <img src="/Pawprints.jpg" alt="love" /> 
-      </div> */}
       <div className="lg:hidden">
         <button onClick={() => setIsOpen(true)} className="text-black">
           <Bars3Icon className="w-8 h-8 cursor-pointer" />
@@ -26,7 +24,7 @@ export default function Header() {
 
       <div className="flex justify-center flex-grow w-32 h-28 lg:w-60 lg:h-44">
         {/* <h1 className="font-special text-6xl m-4 lg:m-20 z-20">Tassar</h1> */}
-        <img src="/logo.svg" alt="website logo" />
+        <Image src="/logo.svg" alt="website logo" width={200} height={200} />
       </div>
 
       <div

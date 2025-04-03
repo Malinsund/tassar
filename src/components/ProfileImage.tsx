@@ -4,13 +4,14 @@ import { db, storage } from "@/firebaseConfig";
 import { CameraIcon } from "@heroicons/react/24/outline";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import Image from "next/image";
 import { FC, useEffect, useRef, useState } from "react";
 
 const ProfileImage: FC<{
   userId: string;
   isEditing: boolean;
   size?: number;
-}> = ({ userId, isEditing, size = 32 }) => {
+}> = ({ isEditing, size = 32 }) => {
   const { user } = useAuth();
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<File | null>(null);
@@ -67,15 +68,17 @@ const ProfileImage: FC<{
   return (
     <div>
       {imageUrl ? (
-        <img
+        <Image
           src={imageUrl}
           alt="Profilbild"
           className="rounded-full object-cover"
           style={{ width: size, height: size }}
+          width={50}
+          height={50}
         />
       ) : (
         <div>
-          <img src="/noImage.svg" alt="no image" />
+          <Image src="/noImage.svg" alt="no image" width={50} height={50} />
           <p>Ingen bild vald</p>
         </div>
       )}

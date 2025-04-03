@@ -12,19 +12,29 @@ import { useState } from "react";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import SecondaryButton from "../Buttons/SecondaryButton";
 
+interface Post {
+  id: string;
+  userId: string;
+  username: string;
+  userProfileImage: string;
+  imageUrl: string;
+  description: string;
+  timestamp: string;
+  postComments: { text: string; username: string }[];
+}
 interface PostModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onPostAdded: (newPost: any) => void;
+  onPostAdded: (newPost: Post) => void;
 }
 
-export default function PostModal({
+const PostModal: React.FC<PostModalProps> = ({
   isOpen,
   onClose,
   onPostAdded,
-}: PostModalProps) {
+}) => {
   const [image, setImage] = useState<File | null>(null);
-  const [postImageUrl, setPostImageUrl] = useState<string | null>(null);
+  const [, setPostImageUrl] = useState<string | null>(null);
   const { imageUrl: userProfileImage } = useProfile();
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
@@ -72,14 +82,16 @@ export default function PostModal({
 
       setPostImageUrl(uploadedImageUrl);
 
-      const newPost = {
-        userId: user?.uid,
+      const newPost: Post = {
+        userId: user?.uid ?? "unknown",
         username: user?.username || "Okänd användare",
         userProfileImage: userProfileImage || "/noImage.svg",
         imageUrl: uploadedImageUrl,
         description,
+        id: "",
+        timestamp: new Date().toISOString(),
+        postComments: [],
       };
-      console.log("skickar till servern", newPost);
 
       const response = await fetch("/api/posts", {
         method: "POST",
@@ -88,12 +100,11 @@ export default function PostModal({
       });
 
       const result = await response.json();
-      console.log("svarfrån servern:", result);
       if (response.ok) {
         onPostAdded({
-          id: result.id,
           ...newPost,
-          timestamp: new Date().toString(),
+          id: result.id,
+          timestamp: new Date().toISOString(),
         });
         onClose();
         setImage(null);
@@ -144,4 +155,5 @@ export default function PostModal({
       </div>
     </div>
   );
-}
+};
+export default PostModal;

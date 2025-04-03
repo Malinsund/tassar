@@ -5,17 +5,16 @@ import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import ProfileImage from "@/components/ProfileImage";
 import { useAuth } from "@/context/AuthContext";
-import { useProfile } from "@/context/ProfileContext";
-import { useConversations } from "@/hooks/useConversations";
 import { useUserData } from "@/hooks/useUserData";
 import { useUserImages } from "@/hooks/useUserImages";
 import { XCircleIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function ProfilePage() {
   const { user } = useAuth();
-  const { imageUrl, setImageUrl } = useProfile();
+
   const { username, description, setDescription } = useUserData(user?.uid);
   const { userImages, deleteUserImage } = useUserImages(user?.uid);
   const [isEditing, setIsEditing] = useState(false);
@@ -23,7 +22,6 @@ export default function ProfilePage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [newDescription, setNewDescription] = useState(description || "");
   const router = useRouter();
-  const conversations = useConversations();
 
   const handleDeleteImage = async () => {
     if (selectedImage) {
@@ -41,7 +39,7 @@ export default function ProfilePage() {
   if (!user) {
     return (
       <div className="flex flex-col justify-center align-middle items-center">
-        <img src="/tassar.svg" alt="tassar logo" />
+        <Image src="/tassar.svg" alt="tassar logo" width={200} height={200} />
         <p className="text-center m-4 text-xl font-special">
           Logga in för att se din profil
         </p>
@@ -112,10 +110,12 @@ export default function ProfilePage() {
                     <XCircleIcon className="w-8 h-8 rounded-full fill-white" />
                   </button>
                 )}
-                <img
+                <Image
                   src={image}
                   alt={`User Image ${index}`}
                   className="w-32 h-32 object-cover rounded-lg"
+                  width={100}
+                  height={100}
                 />
               </div>
             ))}

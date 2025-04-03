@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import PostCard from "@/components/Posts/PostCard";
 import PostModal from "@/components/Posts/PostModal";
-import { useProfile } from "@/context/ProfileContext";
 import { db } from "@/firebaseConfig";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
@@ -19,10 +18,12 @@ interface Post {
   timestamp: string;
   postComments: { text: string; username: string }[];
 }
+interface Comment {
+  text: string;
+  username: string;
+}
 
 export default function PostPage() {
-  const { imageUrl: userProfileImage } = useProfile();
-
   const [posts, setPosts] = useState<Post[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -31,9 +32,7 @@ export default function PostPage() {
       const querySnapshot = await getDocs(
         query(collection(db, "posts"), orderBy("createdAt", "desc"))
       );
-      const postsData = querySnapshot.docs.map((doc) => {
-        return doc.data();
-      });
+
       const posts = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         username: doc.data().username,
@@ -47,7 +46,7 @@ export default function PostPage() {
             .createdAt?.toDate()
             .toString() || "",
         postComments:
-          doc.data().comments?.map((c: any) => ({
+          doc.data().comments?.map((c: Comment) => ({
             text: c.text || "",
             username: c.username || "Okänd användare",
           })) || [],
