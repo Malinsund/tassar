@@ -1,10 +1,10 @@
 "use client";
-import CategoryList from "@/components/Forum/CategoryList";
-import NewThreadModal from "@/components/Forum/NewThreadModal";
-import ThreadList from "@/components/Forum/ThreadList";
-import ThreadView from "@/components/Forum/ThreadView";
+import CategoryList from "@/components/CategoryList";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
+import NewThreadModal from "@/components/NewThreadModal";
+import ThreadList from "@/components/ThreadList";
+import ThreadView from "@/components/ThreadView";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 interface Thread {

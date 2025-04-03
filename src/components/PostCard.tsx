@@ -4,9 +4,9 @@ import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import CommentBubble from "../CommentButton";
-import ProfileImage from "../ProfileImage";
+import CommentBubble from "./CommentButton";
 import CommentForm from "./CommentForm";
+import ProfileImage from "./ProfileImage";
 
 interface PostCardProps {
   id: string;

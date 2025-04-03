@@ -1,8 +1,8 @@
 "use client";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
-import PostCard from "@/components/Posts/PostCard";
-import PostModal from "@/components/Posts/PostModal";
+import PostCard from "@/components/PostCard";
+import PostModal from "@/components/PostModal";
 import { db } from "@/firebaseConfig";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
