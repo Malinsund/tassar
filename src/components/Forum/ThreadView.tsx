@@ -1,3 +1,4 @@
+import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import { db } from "@/firebaseConfig";
 import {
   addDoc,
@@ -8,7 +9,6 @@ import {
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import PrimaryButton from "../Buttons/PrimaryButton";
 
 interface Thread {
   id: string;

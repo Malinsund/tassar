@@ -1,10 +1,10 @@
 "use client";
+import LogoutButton from "@/components/Buttons/LogoutButton";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useState } from "react";
-import LogoutButton from "./Buttons/LogoutButton";
 import Navbar from "./Navbar";
 import ProfileImageView from "./ProfileImageView";
 
