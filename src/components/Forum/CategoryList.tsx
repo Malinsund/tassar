@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const categories = [
   { name: "Katter", subcategories: [] },
@@ -27,16 +27,16 @@ interface Props {
   onCategorySelect: (category: string) => void;
 }
 
-export default function CategoryList({ onCategorySelect }: Props) {
+const CategoryList = ({ onCategorySelect }: Props) => {
   const [openCategory, setOpenCategory] = useState<string | null>(null);
 
   const toggleCategory = (categoryName: string) => {
     setOpenCategory(openCategory === categoryName ? null : categoryName);
   };
 
-  const handleCategoryClick = (categoryName: string) => {
-    console.log(`Navigera till ${categoryName}`);
-  };
+  useEffect(() => {
+    // Dynamiskt definiera onCategorySelect om den behövs endast på klienten
+  }, []);
 
   return (
     <div className="bg-blue-300 p-4 rounded-md">
@@ -73,4 +73,6 @@ export default function CategoryList({ onCategorySelect }: Props) {
       </ul>
     </div>
   );
-}
+};
+
+export default CategoryList;
