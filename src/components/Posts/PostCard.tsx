@@ -4,7 +4,7 @@ import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import CommentBubble from "../Buttons/CommentButton";
+import CommentBubble from "../CommentButton";
 import ProfileImage from "../ProfileImage";
 import CommentForm from "./CommentForm";
 
