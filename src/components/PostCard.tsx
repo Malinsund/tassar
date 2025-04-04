@@ -1,7 +1,6 @@
 import { useAuth } from "@/context/AuthContext";
 import { db } from "@/firebaseConfig";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CommentBubble from "./CommentButton";
@@ -103,7 +102,7 @@ const PostCard: React.FC<PostCardProps> = ({
 
         {/* Inläggsbild */}
         <div className="mt-3 flex justify-center">
-          <Image
+          <img
             src={imageUrl}
             alt="users postimage"
             width={500}
