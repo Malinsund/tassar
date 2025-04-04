@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['firebasestorage.googleapis.com', 'example.com'],
+    unoptimized: true,
   },
   webpack(config) {
     config.resolve.alias['@'] = path.join(__dirname, 'src');
