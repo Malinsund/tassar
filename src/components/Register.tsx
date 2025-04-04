@@ -22,6 +22,7 @@ export default function RegisterPage() {
 
   return (
     <div className="flex flex-col justify-center items-center text-center">
+      <img src="/logo.svg" alt="tassar logo" />
       <h1 className="font-special text-2xl">Registrera dig</h1>
       <form onSubmit={handleRegister} className="flex flex-col items-center">
         <input
