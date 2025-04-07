@@ -61,6 +61,7 @@ const PostCard: React.FC<PostCardProps> = ({
     const commentData = {
       text: newComment,
       username: username,
+      userId: user?.uid,
     };
 
     const postRef = doc(db, "posts", id);
