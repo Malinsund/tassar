@@ -20,14 +20,14 @@ const ProfileImage: FC<{
   useEffect(() => {
     if (user?.uid) {
       const fetchProfileImage = async () => {
-        const userDoc = await getDoc(doc(db, "users", userId));
+        const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.exists()) {
           setImageUrl(userDoc.data().profileImage || "/noImage.svg");
         }
       };
       fetchProfileImage();
     }
-  }, [userId]);
+  }, [user?.uid]);
 
   // Hantera filändringar
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
