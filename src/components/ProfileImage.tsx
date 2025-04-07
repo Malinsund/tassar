@@ -27,7 +27,7 @@ const ProfileImage: FC<{
       };
       fetchProfileImage();
     }
-  }, [userId]);
+  }, [userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Hantera filändringar
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
