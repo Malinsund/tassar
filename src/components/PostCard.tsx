@@ -79,8 +79,6 @@ const PostCard: React.FC<PostCardProps> = ({
     setIsCommenting((prev) => !prev);
   };
 
-  const profileLink = user?.uid === userId ? "/profile" : `/profile/${userId}`;
-
   return (
     <>
       <div className="bg-gray-100 rounded-lg shadow-md p-4 mb-4 font-poppins">
