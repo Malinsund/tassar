@@ -21,7 +21,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" className="font-poppins">
-      <head><link rel="icon" href="/favocon.ico" /></head>
+      <head><link rel="icon" href="/favicon.ico" /></head>
       <AuthProvider>
         <ProfileProvider>
         <body>

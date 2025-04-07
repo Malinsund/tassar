@@ -11,7 +11,7 @@ const ProfileImage: FC<{
   userId: string;
   isEditing: boolean;
   size?: number;
-}> = ({ isEditing, size = 32 }) => {
+}> = ({ userId, isEditing, size = 32 }) => {
   const { user } = useAuth();
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<File | null>(null);
@@ -20,14 +20,14 @@ const ProfileImage: FC<{
   useEffect(() => {
     if (user?.uid) {
       const fetchProfileImage = async () => {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
+        const userDoc = await getDoc(doc(db, "users", userId));
         if (userDoc.exists()) {
           setImageUrl(userDoc.data().profileImage || "/noImage.svg");
         }
       };
       fetchProfileImage();
     }
-  }, [user]);
+  }, [userId]);
 
   // Hantera filändringar
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

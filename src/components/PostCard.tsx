@@ -91,7 +91,7 @@ const PostCard: React.FC<PostCardProps> = ({
           </div>
           <div>
             <Link
-              href={profileLink}
+              href={`/profile?userId=${userId}`}
               className="font-semibold text-black hover:underline"
             >
               <p className="font-semibold">@{username}</p>

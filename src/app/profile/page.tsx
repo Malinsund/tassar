@@ -9,32 +9,32 @@ import { useUserData } from "@/hooks/useUserData";
 import { useUserImages } from "@/hooks/useUserImages";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import router from "next/router";
+import { useEffect, useState } from "react";
 
 export default function ProfilePage() {
   const { user } = useAuth();
+  const searchParams = useSearchParams();
+  const queryUserId = searchParams?.get("userId");
+  const userIdToShow = queryUserId || user?.uid;
 
-  const { username, description, setDescription } = useUserData(user?.uid);
-  const { userImages, deleteUserImage } = useUserImages(user?.uid);
+  const { username, description, setDescription } = useUserData(userIdToShow);
+  const { userImages, deleteUserImage } = useUserImages(userIdToShow);
   const [isEditing, setIsEditing] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [newDescription, setNewDescription] = useState(description || "");
-  const router = useRouter();
+  const [isOwnProfile, setIsOwnProfile] = useState(false);
 
-  const handleDeleteImage = async () => {
-    if (selectedImage) {
-      await deleteUserImage(selectedImage);
-      setShowConfirm(false);
-    }
-  };
+  useEffect(() => {
+    setIsOwnProfile(userIdToShow === user?.uid);
+    console.log("Visar profil för:", userIdToShow);
+  }, [userIdToShow, user]);
 
-  const saveAllChanges = async () => {
-    if (isEditing) {
-      await setDescription(newDescription);
-    }
-  };
+  useEffect(() => {
+    setNewDescription(description || "");
+  }, [description]);
 
   if (!user) {
     return (
@@ -53,6 +53,19 @@ export default function ProfilePage() {
     );
   }
 
+  const handleDeleteImage = async () => {
+    if (selectedImage) {
+      await deleteUserImage(selectedImage);
+      setShowConfirm(false);
+    }
+  };
+
+  const saveAllChanges = async () => {
+    if (isEditing && isOwnProfile) {
+      await setDescription(newDescription);
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -62,14 +75,18 @@ export default function ProfilePage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 lg:h-screen gap-2">
         {/* Profilinformation */}
         <div className="flex flex-col items-center col-span-1 p-4 gap-2 lg:gap-4">
-          <ProfileImage userId={user.uid} isEditing={isEditing} size={200} />
+          <ProfileImage
+            userId={userIdToShow!}
+            isEditing={isEditing && isOwnProfile}
+            size={200}
+          />
           {username && (
             <h2 className="text-2xl font-bold self-start lg:self-center text-left lg:text-center">
               @{username}
             </h2>
           )}
           <div className="text-left lg:text-center">
-            {isEditing ? (
+            {isEditing && isOwnProfile ? (
               <textarea
                 className="rounded-lg border-grey10 w-56 h-24 lg:w-72 p-2"
                 value={newDescription}
@@ -79,18 +96,18 @@ export default function ProfilePage() {
               <p>{description || "Ingen beskrivning satt"}</p>
             )}
           </div>
-          <div className="flex lg:mt-8 gap-8">
-            <PrimaryButton
-              onClick={() => {
-                if (isEditing) {
-                  saveAllChanges();
-                }
-                setIsEditing(!isEditing);
-              }}
-              text={isEditing ? "Spara" : "Redigera profil"}
-              className="lg:place-content-end"
-            />
-          </div>
+          {isOwnProfile && (
+            <div className="flex lg:mt-8 gap-8">
+              <PrimaryButton
+                onClick={() => {
+                  if (isEditing) saveAllChanges();
+                  setIsEditing(!isEditing);
+                }}
+                text={isEditing ? "Spara" : "Redigera profil"}
+                className="lg:place-content-end"
+              />
+            </div>
+          )}
         </div>
 
         {/* Bilder */}
@@ -99,9 +116,9 @@ export default function ProfilePage() {
           <div className="grid grid-cols-4 gap-2">
             {userImages.map((image, index) => (
               <div key={index} className="relative m-2">
-                {isEditing && (
+                {isEditing && isOwnProfile && (
                   <button
-                    className="absolute -top-2 -right-2 "
+                    className="absolute -top-2 -right-2"
                     onClick={() => {
                       setSelectedImage(image);
                       setShowConfirm(true);
