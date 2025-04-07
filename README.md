@@ -51,13 +51,13 @@ För att få Godkänt (G) på examensarbetet måste samtliga kursmål och krav u
 
 ### Planering och Research
 
-- [ x ] Utföra en noggrann målgruppsanalys.
-- [ x] Använda ett projekthanteringsverktyg för backlog, t.ex. Trello eller Kanban.
+- [x] Utföra en noggrann målgruppsanalys.
+- [x] Använda ett projekthanteringsverktyg för backlog, t.ex. Trello eller Kanban.
 
 ### Design och Prototyping
 
-- [ ] Skapa wireframes och prototyp i Figma som följer UX/UI-principer.
-- [ ] Se till att designen är responsiv för minst två olika skärmstorlekar och följer WCAG 2.1-standarder.
+- [x] Skapa wireframes och prototyp i Figma som följer UX/UI-principer.
+- [x] Se till att designen är responsiv för minst två olika skärmstorlekar och följer WCAG 2.1-standarder.
 
 ### Applikationsutveckling
 
@@ -76,23 +76,23 @@ För att få Godkänt (G) på examensarbetet måste samtliga kursmål och krav u
 
 En 2–3 sidor lång rapport med:
 
-- [ ] Abstract på engelska.
-- [ ] Tech stack och motivering av valen.
-- [ ] Dokumentation av arbetsprocess, planering och research.
+- [x] Abstract på engelska.
+- [x] Tech stack och motivering av valen.
+- [x] Dokumentation av arbetsprocess, planering och research.
 
 ### Deploy
 
-- [ ] Projektet ska vara hostat och tillgängligt för att kunna visas i en webbläsare eller simulator.
+- [x] Projektet ska vara hostat och tillgängligt för att kunna visas i en webbläsare eller simulator.
 
 ## Väl godkänd (VG)
 
 För att få Väl Godkänt (VG) krävs en djupare förståelse, professionell kvalitet och avancerade tekniska lösningar.
 
-- [ ] **Allt för Godkänt (G)**
+- [x] **Allt för Godkänt (G)**
 
 ### Design och Prototyping
 
-- [ ] Implementera interaktivitet i prototypen för att demonstrera hur användaren interagerar med produkten.
+- [x] Implementera interaktivitet i prototypen för att demonstrera hur användaren interagerar med produkten.
 - [ ] Prototypen ska vara mycket lik den färdiga produkten.
 - [ ] Designen följer, utan undantag, WCAG 2.1-standarder för nivå A och AA.
 
@@ -102,23 +102,23 @@ För att få Väl Godkänt (VG) krävs en djupare förståelse, professionell kv
 - [ ] Koden följer, utan undantag, WCAG 2.1-standarder för nivå A och AA.
 - [ ] **Optimering**: Produkten ska vara optimerad genom återanvändning av kod och komponenter samt användning av optimeringstekniker där det behövs.
 - [ ] **CRUD-operationer**: Implementera Create, Read, Update, Delete med säker hantering av användardata.
-- [ x ] **Säker autentisering**: Implementera OAuth, JWT eller Firebase Authentication för att säkerställa att endast behöriga användare kan hantera data.
+- [x] **Säker autentisering**: Implementera OAuth, JWT eller Firebase Authentication för att säkerställa att endast behöriga användare kan hantera data.
 - [ ] **För webbapp**: Produkten ska vara fullt responsiv och dynamiskt anpassa sig till olika skärmstorlekar och enheter.
 
 ### Versionshantering
 
-- [ ] Arbeta med feature branches och gör pull requests innan merge för att säkerställa ordning och spårbarhet.
-- [ ] Dokumentera varje steg i commit-historiken med tydliga commit-meddelanden.
+- [x] Arbeta med feature branches och gör pull requests innan merge för att säkerställa ordning och spårbarhet.
+- [x] Dokumentera varje steg i commit-historiken med tydliga commit-meddelanden.
 - [ ] Skriv en tydlig README som beskriver projektet, hur det körs och de tekniska valen.
 
 ### Deploy
 
-- [ ] Implementera ett automatiserat flöde för bygge och deploy där publicering sker automatiskt till en produktionsmiljö.
+- [x] Implementera ett automatiserat flöde för bygge och deploy där publicering sker automatiskt till en produktionsmiljö.
 
 ### Slutrapport
 
 En 3–6 sidor lång rapport med:
 
-- [ ] En genomgång av varje steg i arbetsprocessen samt reflektioner över utmaningar och lösningar.
-- [ ] En detaljerad beskrivning av verktyg och tekniker som använts, med motivering av valen.
+- [x] En genomgång av varje steg i arbetsprocessen samt reflektioner över utmaningar och lösningar.
+- [x] En detaljerad beskrivning av verktyg och tekniker som använts, med motivering av valen.
 - [ ] Förklaringar och motiveringar av UX/UI-designbeslut och tillgänglighetsanpassningar.
