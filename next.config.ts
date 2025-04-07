@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
     config.resolve.alias['@'] = path.join(__dirname, 'src');
     return config;
   },
-  output: 'export',  
 };
 
 export default nextConfig;
