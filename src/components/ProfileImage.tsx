@@ -18,9 +18,9 @@ const ProfileImage: FC<{
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    if (user?.uid) {
+    if (userId) {
       const fetchProfileImage = async () => {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
+        const userDoc = await getDoc(doc(db, "users", userId));
         if (userDoc.exists()) {
           setImageUrl(userDoc.data().profileImage || "/noImage.svg");
         }
