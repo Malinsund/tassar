@@ -23,7 +23,6 @@ export default function Header() {
       </div>
 
       <div className="flex justify-center flex-grow w-32 h-28 lg:w-60 lg:h-44">
-        {/* <h1 className="font-special text-6xl m-4 lg:m-20 z-20">Tassar</h1> */}
         <Image src="/logo.svg" alt="website logo" width={200} height={200} />
       </div>
 
