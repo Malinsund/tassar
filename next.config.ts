@@ -4,7 +4,7 @@ import path from 'path';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['firebasestorage.googleapis.com', 'example.com'],
+    domains: ['firebasestorage.googleapis.com'],
     unoptimized: true,
   },
   webpack(config) {
