@@ -27,7 +27,7 @@ const ProfileImage: FC<{
       };
       fetchProfileImage();
     }
-  }, [user?.uid]);
+  }, [userId]);
 
   // Hantera filändringar
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
