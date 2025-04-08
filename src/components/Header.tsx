@@ -52,29 +52,32 @@ export default function Header() {
 
       {/* Profilmeny */}
       <div
-        className={`fixed top-0 right-0 h-auto w-auto bg-secondary rounded-l-md shadow-lg  transform transition-transform duration-300 ${
+        className={` fixed top-0 right-0 h-auto w-64 lg:w-80 bg-secondary rounded-l-md shadow-lg  transform transition-transform duration-300 z-50 ${
           profileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Stängningsknapp???*/}
-        <div className=" p-4">
+        {/* Stängningsknapp*/}
+        <div className=" flex justify-between p-4 border-b-2">
           <button
             onClick={() => setProfileMenuOpen(false)}
             className="text-primary"
           >
             <XMarkIcon className="w-8 h-8 cursor-pointer" />
           </button>
-        </div>
 
-        <div className="p-2 text-white">
-          <div className="flex items-center font-bold">
-            <div className="rounded-full w-10">
+          <div className="flex">
+            <div className="rounded-full w-10 border-2">
               <ProfileImageView imageUrl={imageUrl} />
             </div>
-            <p>{user?.username}</p>
+            <p className="flex items-center text-lg text-white font-poppins px-2">
+              {" "}
+              {user?.username}
+            </p>
           </div>
+        </div>
 
-          <div className="hidden lg:block">
+        <div className="p-4 text-white">
+          <div className="mt-10 text-xl font-bold">
             <LogoutButton />
           </div>
         </div>

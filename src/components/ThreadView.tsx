@@ -4,7 +4,9 @@ import {
   addDoc,
   collection,
   getDocs,
+  orderBy,
   query,
+  serverTimestamp,
   Timestamp,
   where,
 } from "firebase/firestore";
@@ -37,7 +39,8 @@ export default function ThreadView({ thread }: Props) {
 
       const repliesQuery = query(
         collection(db, "forumReplies"),
-        where("threadId", "==", thread.id)
+        where("threadId", "==", thread.id),
+        orderBy("createdAt", "asc")
       );
       const querySnapshot = await getDocs(repliesQuery);
       const fetchedReplies = querySnapshot.docs.map((doc) => ({
@@ -57,7 +60,7 @@ export default function ThreadView({ thread }: Props) {
     await addDoc(collection(db, "forumReplies"), {
       threadId: thread?.id,
       content: replyContent,
-      createdAt: new Date(),
+      createdAt: serverTimestamp(),
     });
 
     setReplyContent("");
@@ -82,9 +85,11 @@ export default function ThreadView({ thread }: Props) {
           {replies.map((reply) => (
             <li key={reply.id} className="p-2 bg-gray-100 rounded">
               <p>{reply.content}</p>
-              <p className="text-sm text-gray-500">
-                Postat: {reply.createdAt.toDate().toLocaleString()}{" "}
-              </p>
+              {reply.createdAt && (
+                <p className="text-sm text-gray-500">
+                  Postat: {reply.createdAt.toDate().toLocaleString()}{" "}
+                </p>
+              )}
             </li>
           ))}
         </ul>
