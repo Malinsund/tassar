@@ -109,20 +109,22 @@ http://localhost:3000/api/hello
 
 ## 📂 Project Structure (Overview)
 
+```plaintext
 /public
-└── images/ → Static images used in the project
+└── images/                → Static images used in the project
 
 /src
-├── app/ → Main Next.js app directory
-│ ├── [your-routes]/ → Page-specific folders (e.g., /profile, /forum, etc.)
-│ ├── layout.tsx → Root layout component
-│ ├── page.tsx → Main landing page
-│ └── global.css → Global styles
-├── components/ → UI components
-├── context/ → Global context providers (e.g., AuthContext)
-├── data/ → Static or shared data files
-├── hooks/ → Custom React hooks
-└── pages/ → API routes
+├── app/                   → Main Next.js app directory
+│   ├── [your-routes]/     → Page-specific folders (e.g., /profile, /forum, etc.)
+│   ├── layout.tsx         → Root layout component
+│   ├── page.tsx           → Main landing page
+│   └── global.css         → Global styles
+├── components/            → UI components
+├── context/               → Global context providers (e.g., AuthContext)
+├── data/                  → Static or shared data files
+├── hooks/                 → Custom React hooks
+└── pages/                 → API routes
+```
 
 # Betygskriterier för examensarbete
 
