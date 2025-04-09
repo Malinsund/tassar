@@ -10,6 +10,7 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 
+import Image from "next/image";
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
 
@@ -164,9 +165,11 @@ const PostModal: React.FC<PostModalProps> = ({
             <>
               <p className="text-sm text-gray-500 mt-2">Vald bild:</p>
               <div className="flex justify-center items-center">
-                <img
+                <Image
                   src={imagePreviewUrl!}
                   alt="Förhandsgranskning"
+                  width={100}
+                  height={100}
                   className="mt-4 max-h-48 object-contain rounded-lg"
                 />
               </div>
