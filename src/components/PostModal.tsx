@@ -10,8 +10,8 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 
-import SecondaryButton from "./SecondaryButton";
 import PrimaryButton from "./PrimaryButton";
+import SecondaryButton from "./SecondaryButton";
 
 interface Post {
   id: string;
@@ -46,6 +46,22 @@ const PostModal: React.FC<PostModalProps> = ({
       setImage(event.target.files[0]);
       console.log("Vald bild:", event.target.files[0]);
     }
+  };
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const files = event.dataTransfer.files;
+    if (files && files[0]) {
+      setImage(files[0]);
+      console.log("Släppt bild:", files[0]);
+    }
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   const uploadImageToStorage = async () => {
@@ -122,18 +138,51 @@ const PostModal: React.FC<PostModalProps> = ({
     setLoading(false);
   };
 
+  const handleClose = () => {
+    setImage(null);
+    setPostImageUrl(null);
+    setDescription("");
+    onClose();
+  };
+
   if (!isOpen) return null;
+
+  const imagePreviewUrl = image ? URL.createObjectURL(image) : null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-lg w-96">
         <h2 className="text-lg font-bold mb-4">Nytt inlägg</h2>
 
-        {/* Bilduppladdning */}
-        <input type="file" accept="image/*" onChange={handleImageUpload} />
-        {image && (
-          <p className="text-sm text-gray-500 mt-2">Bild vald: {image.name}</p>
-        )}
+        {/* Drag-and-drop område */}
+        <div
+          className="border-2 border-dashed p-4 text-center text-gray-500 rounded-md cursor-pointer"
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+        >
+          {image ? (
+            <>
+              <p className="text-sm text-gray-500 mt-2">Vald bild:</p>
+              <div className="flex justify-center items-center">
+                <img
+                  src={imagePreviewUrl!}
+                  alt="Förhandsgranskning"
+                  className="mt-4 max-h-48 object-contain rounded-lg"
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <p>Släpp en bild här eller klicka för att välja en bild</p>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+            </>
+          )}
+        </div>
 
         {/* Beskrivning */}
         <textarea
@@ -145,7 +194,7 @@ const PostModal: React.FC<PostModalProps> = ({
 
         {/* Knappar */}
         <div className="mt-4 flex justify-between">
-          <SecondaryButton onClick={onClose} text="stäng" />
+          <SecondaryButton onClick={handleClose} text="stäng" />
 
           <PrimaryButton
             text={loading ? "Laddar upp..." : "Lägg upp"}
