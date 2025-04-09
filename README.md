@@ -10,7 +10,7 @@
 
 This project was developed as part of a final thesis with the goal of creating a social and informative platform for people who love animals.
 
-Visit the website: [https://tassar.vercel.app/]
+Visit the website: [Tassar](https://tassar.vercel.app/)
 
 ---
 
