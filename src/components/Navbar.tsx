@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import LogoutButton from "./LogoutButton";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -41,9 +40,6 @@ export default function Navbar() {
         <Link href={"/profile"}>
           <h2>Profil</h2>
         </Link>
-      </div>
-      <div className="md:hidden">
-        <LogoutButton />
       </div>
     </div>
   );
