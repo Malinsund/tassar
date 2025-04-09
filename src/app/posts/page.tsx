@@ -70,7 +70,7 @@ export default function PostPage() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
         <div className="lg:col-span-1"></div>
-        <div className="lg:col-span-2 overflow-y-scroll h-screen">
+        <div className="lg:col-span-2 overflow-y-scroll h-auto">
           <div className="sticky top-0 flex justify-center z-30">
             <button
               onClick={() => setIsModalOpen(true)}

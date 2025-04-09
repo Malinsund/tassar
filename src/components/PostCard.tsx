@@ -107,7 +107,7 @@ const PostCard: React.FC<PostCardProps> = ({
             alt="users postimage"
             width={500}
             height={500}
-            className="rounded-lg object-cover w-full h-96"
+            className="rounded-lg object-cover w-full max-h-[800px]"
           />
         </div>
         <div className="w-8 h-8"></div>
