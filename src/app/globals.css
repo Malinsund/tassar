@@ -16,10 +16,7 @@
   --whiteopac:rgba(255, 255, 255, 0.868);
 
   --destructive:#BB0505;
- /*  #b47548
-  #c9eddc
-  #7adfbb
-   */
+ 
 }
 
 
@@ -39,19 +36,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.nav{
-  border-radius: 9px;
-  
-}
-.nav:hover{
-  background:var(--primary);
-  color:white;
-}
-.nav.active{
-  background: #1D4265;
-  color: white;
-  
-}
+
 
 
 .hamMen.active {
