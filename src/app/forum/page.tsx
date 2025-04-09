@@ -20,7 +20,7 @@ export default function Forum() {
   const [activeThread, setActiveThread] = useState<Thread | null>(null);
 
   return (
-    <div className="max-h-screen">
+    <main className="max-h-screen">
       <Header />
       <div className="hidden lg:block">
         <Navbar />
@@ -65,6 +65,6 @@ export default function Forum() {
           onClose={() => setIsModalOpen(false)}
         />
       </div>
-    </div>
+    </main>
   );
 }

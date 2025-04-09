@@ -67,7 +67,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div>
+    <main>
       <Header />
       <div className="hidden lg:block">
         <Navbar />
@@ -170,6 +170,6 @@ export default function ProfilePage() {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }
