@@ -22,13 +22,13 @@ export default function Navbar() {
           <h2>Forum</h2>
         </Link>
       </div>
-      <div className={`nav p-2 ${isActive("/")}`}>
+      <div className={`nav p-2 ${isActive("/adoption")}`}>
         <h2>Omplacering</h2>
       </div>
-      <div className={`nav p-2 ${isActive("/")}`}>
+      <div className={`nav p-2 ${isActive("/lost-and-found")}`}>
         <h2>Efterlysning</h2>
       </div>
-      <div className={`nav p-2 ${isActive("/")}`}>
+      <div className={`nav p-2 ${isActive("/organizations")}`}>
         <h2>Organisationer</h2>
       </div>
       <div className={`nav p-2 ${isActive("/profile")}`}>
