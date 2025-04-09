@@ -1,8 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🐾 Tassar – A Social Platform for Pet Owners
 
-## Getting Started
+**Tassar** is a web application for current and future pet owners. Users can:
 
-First, run the development server:
+- Scroll through posts shared by others
+- View and visit user profiles
+- Discuss in a forum about various animals and topics
+- Learn more about animal organizations
+- Report and find lost pets
+
+This project was developed as part of a final thesis with the goal of creating a social and informative platform for people who love animals.
+
+Visit the website: [https://tassar.vercel.app/]
+
+---
+
+## 🚀 Getting Started
+
+To run the project locally, follow these steps:
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/your-username/tassar.git
+cd tassar
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. **Start the development server**
 
 ```bash
 npm run dev
@@ -14,30 +45,84 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## ⚙️ Technical Stack
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+This project uses modern web technologies suitable for building a fullstack application:
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🧠 Next.js (with TypeScript)
 
-## Learn More
+[Next.js](https://nextjs.org) is used as the main framework because it provides:
 
-To learn more about Next.js, take a look at the following resources:
+- Server-side rendering (SSR) for performance and SEO
+- Fullstack capabilities via API routes
+- Excellent support for TypeScript
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### 🎨 Tailwind CSS
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+[Tailwind CSS](https://tailwindcss.com) is used for styling thanks to its:
 
-## Deploy on Vercel
+- Utility-first approach
+- Fast prototyping capabilities
+- Simplicity and flexibility
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🔥 Firebase
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+[Firebase](https://firebase.google.com) is used for backend and database services:
+
+- **Firestore** for real-time database
+- **Firebase Authentication** for user login
+- **Firebase Storage** for uploading images
+- Easy setup and seamless integration with Next.js
+
+### ☁️ Hosting with Vercel
+
+[Vercel](https://vercel.com) is used for hosting and deployment:
+
+- Seamless integration with Next.js
+- Fast deploys from GitHub
+- Free hosting for small projects
+
+---
+
+## 📚 Documentation and Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Firebase Documentation](https://firebase.google.com/docs)
+- [Vercel Documentation](https://vercel.com/docs)
+
+---
+
+## 🧪 API Routes
+
+The project includes API routes accessible under `/api`. For example:
+
+```bash
+http://localhost:3000/api/hello
+```
+
+---
+
+## 📂 Project Structure (Overview)
+
+/public
+└── images/ → Static images used in the project
+
+/src
+├── app/ → Main Next.js app directory
+│ ├── [your-routes]/ → Page-specific folders (e.g., /profile, /forum, etc.)
+│ ├── layout.tsx → Root layout component
+│ ├── page.tsx → Main landing page
+│ └── global.css → Global styles
+├── components/ → UI components
+├── context/ → Global context providers (e.g., AuthContext)
+├── data/ → Static or shared data files
+├── hooks/ → Custom React hooks
+└── pages/ → API routes
 
 # Betygskriterier för examensarbete
 
@@ -66,7 +151,7 @@ För att få Godkänt (G) på examensarbetet måste samtliga kursmål och krav u
 - [x] Implementera state-hantering och skapa dynamiska komponenter med reaktivitet och interaktivitet.
 - [x] Följa WCAG 2.1-standarder och använda semantisk HTML.
 - [x] **För webbapp**: Produkten ska vara responsiv och fungera korrekt på minst två skärmstorlekar (mobil och dator).
-- [ ] **För native mobilapp**: Produkten ska anpassas till olika skärmstorlekar och enhetsorienteringar (porträtt och landskap).
+- [x] **För native mobilapp**: Produkten ska anpassas till olika skärmstorlekar och enhetsorienteringar (porträtt och landskap).
 
 ### Versionshantering
 
@@ -93,23 +178,23 @@ För att få Väl Godkänt (VG) krävs en djupare förståelse, professionell kv
 ### Design och Prototyping
 
 - [x] Implementera interaktivitet i prototypen för att demonstrera hur användaren interagerar med produkten.
-- [ ] Prototypen ska vara mycket lik den färdiga produkten.
+- [x] Prototypen ska vara mycket lik den färdiga produkten.
 - [ ] Designen följer, utan undantag, WCAG 2.1-standarder för nivå A och AA.
 
 ### Applikationsutveckling
 
 - [ ] Använd en state management-lösning, t.ex. Redux eller Pinia, för att hantera global state.
-- [ ] Koden följer, utan undantag, WCAG 2.1-standarder för nivå A och AA.
-- [ ] **Optimering**: Produkten ska vara optimerad genom återanvändning av kod och komponenter samt användning av optimeringstekniker där det behövs.
-- [ ] **CRUD-operationer**: Implementera Create, Read, Update, Delete med säker hantering av användardata.
+- [x] Koden följer, utan undantag, WCAG 2.1-standarder för nivå A och AA.
+- [x] **Optimering**: Produkten ska vara optimerad genom återanvändning av kod och komponenter samt användning av optimeringstekniker där det behövs.
+- [x] **CRUD-operationer**: Implementera Create, Read, Update, Delete med säker hantering av användardata.
 - [x] **Säker autentisering**: Implementera OAuth, JWT eller Firebase Authentication för att säkerställa att endast behöriga användare kan hantera data.
-- [ ] **För webbapp**: Produkten ska vara fullt responsiv och dynamiskt anpassa sig till olika skärmstorlekar och enheter.
+- [x] **För webbapp**: Produkten ska vara fullt responsiv och dynamiskt anpassa sig till olika skärmstorlekar och enheter.
 
 ### Versionshantering
 
 - [x] Arbeta med feature branches och gör pull requests innan merge för att säkerställa ordning och spårbarhet.
 - [x] Dokumentera varje steg i commit-historiken med tydliga commit-meddelanden.
-- [ ] Skriv en tydlig README som beskriver projektet, hur det körs och de tekniska valen.
+- [x] Skriv en tydlig README som beskriver projektet, hur det körs och de tekniska valen.
 
 ### Deploy
 
@@ -121,4 +206,4 @@ En 3–6 sidor lång rapport med:
 
 - [x] En genomgång av varje steg i arbetsprocessen samt reflektioner över utmaningar och lösningar.
 - [x] En detaljerad beskrivning av verktyg och tekniker som använts, med motivering av valen.
-- [ ] Förklaringar och motiveringar av UX/UI-designbeslut och tillgänglighetsanpassningar.
+- [x] Förklaringar och motiveringar av UX/UI-designbeslut och tillgänglighetsanpassningar.
