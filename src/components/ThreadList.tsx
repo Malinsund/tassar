@@ -46,7 +46,7 @@ export default function ThreadList({
   return (
     <div className="p-4">
       <h2 className="text-3xl font-special font-bold mb-2">
-        Trådar i "{selectedCategory}"
+        Trådar i &quot;{selectedCategory}&quot;
       </h2>
       <ul>
         {threads.map((thread) => (
