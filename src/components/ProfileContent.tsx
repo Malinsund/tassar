@@ -75,7 +75,7 @@ export default function ProfilePage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 lg:h-screen gap-2">
         {/* Profilinformation */}
         <div className="flex flex-col items-center col-span-1 p-4 gap-2 lg:gap-4">
-          <div className="border-2 rounded-full border-black">
+          <div className="border-2 rounded-full ">
             <ProfileImage
               userId={userIdToShow!}
               isEditing={isEditing && isOwnProfile}
@@ -114,7 +114,6 @@ export default function ProfilePage() {
 
         {/* Bilder */}
         <div className="border-y-2 lg:border-y-0 lg:border-x-2 p-2 col-span-2 lg:flex-grow h-full">
-          <h1>bilder</h1>
           <div className="grid grid-cols-4 gap-2">
             {userImages.map((image, index) => (
               <div key={index} className="relative m-2">
