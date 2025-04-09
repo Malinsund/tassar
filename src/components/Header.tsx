@@ -52,7 +52,7 @@ export default function Header() {
 
       {/* Profilmeny */}
       <div
-        className={` fixed top-0 right-0 h-auto w-64 lg:w-80 bg-secondary rounded-l-md shadow-lg  transform transition-transform duration-300 z-50 ${
+        className={` fixed top-0 right-0 h-auto w-64 lg:w-80 bg-primary rounded-l-md shadow-lg  transform transition-transform duration-300 z-50 ${
           profileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -60,7 +60,7 @@ export default function Header() {
         <div className=" flex justify-between p-4 border-b-2">
           <button
             onClick={() => setProfileMenuOpen(false)}
-            className="text-primary"
+            className="text-white"
           >
             <XMarkIcon className="w-8 h-8 cursor-pointer" />
           </button>

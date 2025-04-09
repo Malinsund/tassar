@@ -96,7 +96,7 @@ const PostCard: React.FC<PostCardProps> = ({
             >
               <p className="font-semibold">@{username}</p>
             </Link>
-            <p className="text-sm text-gray-500">{formattedDate}</p>
+            <p className="text-sm text-gray-700">{formattedDate}</p>
           </div>
         </div>
 
@@ -104,7 +104,7 @@ const PostCard: React.FC<PostCardProps> = ({
         <div className="mt-3 flex justify-center">
           <Image
             src={imageUrl}
-            alt="users postimage"
+            alt="uploaded image"
             width={500}
             height={500}
             className="rounded-lg object-cover w-full max-h-[800px]"
