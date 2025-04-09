@@ -34,12 +34,10 @@ const CategoryList = ({ onCategorySelect }: Props) => {
     setOpenCategory(openCategory === categoryName ? null : categoryName);
   };
 
-  useEffect(() => {
-    // Dynamiskt definiera onCategorySelect om den behövs endast på klienten
-  }, []);
+  useEffect(() => {}, []);
 
   return (
-    <div className="bg-blue-300 p-4 rounded-md">
+    <div className="p-4 rounded-md">
       <h2 className="text-3xl font-special font-semibold mb-2">Kategorier</h2>
       <ul>
         {categories.map((category) => (

@@ -173,13 +173,15 @@ const PostModal: React.FC<PostModalProps> = ({
             </>
           ) : (
             <>
-              <p>Släpp en bild här eller klicka för att välja en bild</p>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-              />
+              <label className="block relative cursor-pointer">
+                <p>Släpp en bild här eller klicka för att välja en bild</p>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="absolute left-0 top-0 w-full h-full opacity-0"
+                />
+              </label>
             </>
           )}
         </div>

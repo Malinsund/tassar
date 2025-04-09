@@ -26,7 +26,7 @@ export default function Forum() {
         <Navbar />
       </div>
       <div className="grid lg:grid-cols-8 gap-2 m-2">
-        <div className="flex justify-between p-4 bg-blue-300 lg:col-span-2">
+        <div className="flex justify-between p-4 lg:col-span-2">
           <CategoryList
             onCategorySelect={(category) => {
               setSelectedCategory(category);
@@ -42,7 +42,7 @@ export default function Forum() {
             </button>
           </div>
         </div>
-        <div className="bg-cyan-600 lg:col-span-2">
+        <div className=" lg:col-span-2 p-4">
           {selectedCategory && (
             <ThreadList
               selectedCategory={selectedCategory}
@@ -51,12 +51,12 @@ export default function Forum() {
             />
           )}
         </div>
-        <div className="bg-sky-600 lg:col-span-4 overflow-y-auto">
+        <div className="lg:col-span-4 overflow-y-auto p-4">
           {activeThread ? (
             <ThreadView thread={activeThread} />
           ) : (
             <div className="flex items-center justify-center h-full text-white">
-              <p>Välj en tråd för att visa innehållet</p>
+              <p className="text-xl">Välj en tråd för att visa innehållet</p>
             </div>
           )}
         </div>

@@ -15,6 +15,7 @@ module.exports = {
           grey10:"var(--grey10)",
           grey50:"var(--grey50)",
           greyopac:"var(--greyopac)",
+          whiteopac:"var(--whiteopac)",
           destructive:"var(--destructive)",
   
         },

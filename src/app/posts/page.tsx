@@ -68,17 +68,21 @@ export default function PostPage() {
       <div className="hidden lg:block sticky top-0">
         <Navbar />
       </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
-        <div className="lg:col-span-1"></div>
-        <div className="lg:col-span-2 overflow-y-scroll h-auto">
-          <div className="sticky top-0 flex justify-center z-30">
+        <div className="lg:col-span-1">
+          <div className="lg:col-span-1 hidden lg:block sticky top-16">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-greyopac text-black p-2 text-center place-items-center  w-full"
+              className="flex justify-center text-black bg-white font-poppins text-lg p-2 text-center place-items-center w-full rounded-lg"
             >
-              <PlusIcon className="w-8 h-8" />
+              <PlusIcon className="w-8 h-8" /> <p>Nytt inlägg</p>
             </button>
+          </div>
+        </div>
 
+        <div className="lg:col-span-2 lg:col-start-2 overflow-y-scroll h-auto">
+          <div className="">
             <PostModal
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
@@ -100,7 +104,14 @@ export default function PostPage() {
             />
           ))}
         </div>
-        <div className="lg:col-span-1 hidden lg:block"></div>
+        <div className="sticky bottom-0 z-30 flex justify-center lg:hidden">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-whiteopac text-black p-2 text-center place-items-center  w-full"
+          >
+            <PlusIcon className="w-8 h-8" />
+          </button>
+        </div>
       </div>
     </>
   );
