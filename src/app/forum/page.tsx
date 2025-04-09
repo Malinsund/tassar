@@ -55,8 +55,10 @@ export default function Forum() {
           {activeThread ? (
             <ThreadView thread={activeThread} />
           ) : (
-            <div className="flex items-center justify-center h-full text-white">
-              <p className="text-xl">Välj en tråd för att visa innehållet</p>
+            <div className="flex items-center justify-center h-full">
+              <p className="text-xl font-poppins">
+                Välj en tråd för att visa innehållet
+              </p>
             </div>
           )}
         </div>

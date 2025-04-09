@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col justify-center text-center ">
+    <div className="flex flex-col justify-center text-center">
       <div className="flex justify-center p-4">
         <Image src="/logo.svg" alt="icon" width={200} height={200} />
       </div>

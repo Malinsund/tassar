@@ -55,7 +55,7 @@ export default function ThreadList({
             onClick={() => onThreadSelect(thread)}
             className={`cursor-pointer p-2 font-poppins rounded ${
               activeThreadId === thread.id
-                ? " text-white text-2xl font-semibold"
+                ? "  text-2xl font-semibold"
                 : " text-lg font-semibold"
             }`}
           >

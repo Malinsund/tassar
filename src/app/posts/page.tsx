@@ -70,17 +70,15 @@ export default function PostPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
-        <div className="lg:col-span-1">
-          <aside className="lg:col-span-1 hidden lg:block sticky top-16">
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="flex justify-center text-black bg-white font-poppins text-lg p-2 text-center place-items-center w-full rounded-lg"
-            >
-              <PlusIcon className="w-8 h-8" /> <p>Nytt inlägg</p>
-            </button>
-          </aside>
-        </div>
-
+        <div className="lg:col-span-1"></div>
+        <aside className="lg:col-span-2 border-2 rounded-lg border-secondary hidden lg:block sticky w-full top-16">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex justify-center text-black bg-white font-poppins text-lg p-2 text-center place-items-center w-full rounded-lg"
+          >
+            <PlusIcon className="w-8 h-8" /> <p>Nytt inlägg</p>
+          </button>
+        </aside>
         <div className="lg:col-span-2 lg:col-start-2 overflow-y-scroll h-auto">
           <div className="">
             <PostModal

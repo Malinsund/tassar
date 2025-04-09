@@ -35,13 +35,13 @@ export default function Header() {
 
       {/* Hamburgermeny med slide-in effekt */}
       <div
-        className={`fixed top-0 left-0 h-screen w-3/4 z-50 bg-white shadow-lg lg:hidden transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-screen w-3/4 z-50 bg-primary text-white shadow-lg lg:hidden transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {/* Stängningsknapp för hamburgermeny */}
         <div className="flex justify-end p-4">
-          <button onClick={() => setIsOpen(false)} className="text-gray-600">
+          <button onClick={() => setIsOpen(false)} className="text-white">
             <XMarkIcon className="w-8 h-8 cursor-pointer" />
           </button>
         </div>

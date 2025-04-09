@@ -75,11 +75,13 @@ export default function ProfilePage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 lg:h-screen gap-2">
         {/* Profilinformation */}
         <div className="flex flex-col items-center col-span-1 p-4 gap-2 lg:gap-4">
-          <ProfileImage
-            userId={userIdToShow!}
-            isEditing={isEditing && isOwnProfile}
-            size={200}
-          />
+          <div className="border-2 rounded-full border-black">
+            <ProfileImage
+              userId={userIdToShow!}
+              isEditing={isEditing && isOwnProfile}
+              size={200}
+            />
+          </div>
           {username && (
             <h2 className="text-2xl font-bold self-start lg:self-center text-left lg:text-center">
               @{username}

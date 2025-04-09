@@ -6,7 +6,7 @@
 
 :root {
   
-  --background: #d3cbbaae; 
+  --background: #c6ced8; 
   --foreground: #171717;
   --primary:#1D4265;
   --secondary: #70A1D1;
@@ -16,7 +16,10 @@
   --whiteopac:rgba(255, 255, 255, 0.868);
 
   --destructive:#BB0505;
-  
+ /*  #b47548
+  #c9eddc
+  #7adfbb
+   */
 }
 
 
@@ -48,4 +51,10 @@ body {
   background: #1D4265;
   color: white;
   
+}
+
+
+.hamMen.active {
+background-color: #c6ced8;
+color:black;
 }
