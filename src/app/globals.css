@@ -6,7 +6,7 @@
 
 :root {
   
-  --background: #918f7fae; 
+  --background: #d3cbbaae; 
   --foreground: #171717;
   --primary:#1D4265;
   --secondary: #70A1D1;
@@ -41,7 +41,8 @@ body {
   
 }
 .nav:hover{
-  background:var(--grey10)
+  background:var(--primary);
+  color:white;
 }
 .nav.active{
   background: #1D4265;
