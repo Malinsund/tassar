@@ -15,7 +15,7 @@ export default function Card({
   title,
   description,
   userId,
-  context,
+
   onAction,
 }: CardProps) {
   return (
