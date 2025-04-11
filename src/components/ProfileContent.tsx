@@ -31,7 +31,7 @@ export default function ProfilePage() {
 
   const [showMessageModal, setShowMessageModal] = useState(false);
 
-  const openMessageModal = (recipientUserId: string) => {
+  const openMessageModal = (_recipientUserId: string) => {
     setShowMessageModal(true);
   };
 

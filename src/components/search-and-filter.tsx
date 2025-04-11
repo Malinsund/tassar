@@ -17,10 +17,6 @@ export default function SearchAndFilter() {
     setCityFilter(e.target.value);
   };
 
-  const clearSearch = () => {
-    setSearchQuery("");
-  };
-
   return (
     <div className="flex flex-col gap-4 dark:text-black font-poppins">
       <label htmlFor="search" className="relative">
