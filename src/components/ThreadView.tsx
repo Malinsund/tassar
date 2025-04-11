@@ -67,7 +67,7 @@ export default function ThreadView({ thread }: Props) {
   };
 
   return (
-    <div className="p-4 mx-4 bg-white shadow-lg rounded-lg border flex flex-col h-full">
+    <div className="p-4 mx-4 dark:text-black bg-white shadow-lg rounded-lg border flex flex-col h-full">
       {thread ? (
         <>
           <h2 className="text-2xl font-bold mb-2">{thread.title}</h2>

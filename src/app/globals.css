@@ -24,7 +24,8 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #ededed; 
+  
     
   }
 }
@@ -37,9 +38,12 @@ body {
 }
 
 
-
-
 .hamMen.active {
 background-color: #c6ced8;
 color:black;
+}
+
+.dark .hamMen.active {
+  background-color: white;
+  color: black;
 }

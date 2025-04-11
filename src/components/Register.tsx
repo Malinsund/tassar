@@ -31,7 +31,7 @@ export default function RegisterPage() {
           placeholder="Användarnamn"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="border p-2 rounded w-64 mb-2"
+          className="border p-2 rounded w-64 mb-2 dark:text-black"
           required
         />
         <input
