@@ -1,3 +1,6 @@
+import { useAuth } from "@/context/AuthContext";
+import { db } from "@/firebaseConfig";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
@@ -14,14 +17,36 @@ export default function CreatePostModal({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [city, setCity] = useState("");
+  const [category, setCategory] = useState("");
 
-  const handleSubmit = () => {
-    console.log("Skapar nytt inlägg för:", context);
-    console.log("Titel:", title);
-    console.log("Beskrivning:", description);
-    console.log("Bild-URL:", imageUrl);
+  const { user } = useAuth();
+  const handleSubmit = async () => {
+    if (!title || !description || !imageUrl) return;
+    const userId = user?.uid;
 
-    closeModal();
+    try {
+      const postData = {
+        title,
+        description,
+        imageUrl,
+        city,
+        category,
+        userId,
+        createdAt: serverTimestamp(),
+      };
+
+      let collectionName = "";
+      if (context === "adoption") collectionName = "adoptionPosts";
+      else if (context === "lost") collectionName = "lostPosts";
+
+      await addDoc(collection(db, collectionName), postData);
+
+      console.log("Inlägg skapat!");
+      closeModal();
+    } catch (error) {
+      console.error("Fel vid skapande av inlägg:", error);
+    }
   };
 
   return (
@@ -67,20 +92,24 @@ export default function CreatePostModal({
           <label className="block text-sm font-medium">Stad</label>
           <input
             type="text"
-            value="stad"
-            onChange={(e) => setTitle(e.target.value)}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
             className="w-full p-2 border rounded-md"
             placeholder="Stad"
           />
         </div>
         <div className="w-full md:w-2/3">
-          <select value="kategori" className="w-full p-2 border rounded-md">
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full p-2 border rounded-md"
+          >
             <option value="">Välj kategori</option>
             <option value="dog">Hundar</option>
             <option value="cat">Katter</option>
-            <option value="other">Gnagare</option>
-            <option value="dog">Reptiler</option>
-            <option value="cat">Fåglar</option>
+            <option value="rodent">Gnagare</option>
+            <option value="reptile">Reptiler</option>
+            <option value="bird">Fåglar</option>
             <option value="other">Andra djur</option>
           </select>
         </div>

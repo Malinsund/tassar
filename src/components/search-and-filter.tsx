@@ -52,6 +52,9 @@ export default function SearchAndFilter() {
           <option value="">Välj kategori</option>
           <option value="dog">Hundar</option>
           <option value="cat">Katter</option>
+          <option value="rodent">Gnagare</option>
+          <option value="reptile">Reptiler</option>
+          <option value="bird">Fåglar</option>
           <option value="other">Andra djur</option>
         </select>
       </div>

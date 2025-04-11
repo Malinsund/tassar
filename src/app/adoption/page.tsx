@@ -5,16 +5,11 @@ import Header from "@/components/Header";
 import MessageModal from "@/components/MessageModal";
 import Navbar from "@/components/Navbar";
 import SearchAndFilter from "@/components/search-and-filter";
+import useAdoptionPosts from "@/hooks/useAdoptionPosts";
 import { useState } from "react";
 
 export default function Adoption() {
-  const pet = {
-    imageUrl: "/hund.png",
-    name: "Bosse",
-    description: "En snäll liten vovve som söker ett nytt hem!",
-    ownerId: "abc123",
-  };
-
+  const { posts, loading } = useAdoptionPosts();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
@@ -57,26 +52,35 @@ export default function Adoption() {
             </button>
           </div>
 
-          <div className="flex justify-center w-full h-auto">
-            <Card
-              imageUrl={pet.imageUrl}
-              title={pet.name}
-              description={pet.description}
-              userId={pet.ownerId}
-              context="adoption"
-              onAction={handleMessageClick}
-            />
-          </div>
+          {loading ? (
+            <p>Laddar inlägg...</p>
+          ) : (
+            posts.map((post) => (
+              <div
+                key={post.id}
+                className="flex justify-center w-full h-auto mb-4"
+              >
+                <Card
+                  imageUrl={post.imageUrl}
+                  title={post.title}
+                  description={post.description}
+                  userId={post.userId}
+                  context="adoption"
+                  onAction={handleMessageClick}
+                />
+              </div>
+            ))
+          )}
         </div>
-
-        {isModalOpen && (
-          <MessageModal userId={selectedUserId!} closeModal={closeModal} />
-        )}
 
         {isPostModalOpen && (
           <CreatePostModal context="adoption" closeModal={closePostModal} />
         )}
-        <div className="col-span-1"></div>
+        <div className="col-span-1">
+          {isModalOpen && (
+            <MessageModal userId={selectedUserId!} closeModal={closeModal} />
+          )}
+        </div>
       </div>
     </main>
   );
