@@ -27,7 +27,7 @@ const CommentBubble: React.FC<CommentProps> = ({ comments }) => {
       </button>
 
       {isOpen && (
-        <div className="mt-2 p-2 bg-slate-50 rounded-lg">
+        <div className="mt-2 p-2 bg-slate-50 dark:text-black rounded-lg">
           {comments.length > 0 ? (
             comments.map((comment, index) => (
               <p key={index} className="text-sm pb-2 text-gray-700">

@@ -119,7 +119,10 @@ const PostCard: React.FC<PostCardProps> = ({
         {/* Formulär för att lägga till en kommentar */}
 
         {isCommenting && (
-          <CommentForm onAddComment={handleAddComment} username={username} />
+          <CommentForm
+            onAddComment={handleAddComment}
+            username={user?.username || "Anonym"}
+          />
         )}
 
         {/* Knapp för att visa/öppna kommentarsfältet */}
