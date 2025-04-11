@@ -51,7 +51,7 @@ export default function CreatePostModal({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg w-96">
+      <div className="bg-white dark:text-black p-6 rounded-lg w-96">
         <h2 className="text-2xl font-bold mb-4">
           Skapa ett nytt{" "}
           {context === "adoption" ? "adoptionsinlägg" : "lost and found-inlägg"}

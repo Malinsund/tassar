@@ -22,7 +22,7 @@ export default function SearchAndFilter() {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 dark:text-black font-poppins">
       <label htmlFor="search" className="relative">
         <input
           type="search"

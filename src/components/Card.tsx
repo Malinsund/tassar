@@ -19,7 +19,7 @@ export default function Card({
   onAction,
 }: CardProps) {
   return (
-    <div className="relative bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden p-4 w-full h-auto">
+    <div className="relative bg-white dark:text-black shadow-md rounded-lg overflow-hidden p-4 w-full h-auto">
       <Image
         src={imageUrl}
         alt={title}
@@ -28,17 +28,17 @@ export default function Card({
         height={400}
       />
       <div className="flex justify-between">
-        <h2 className="text-xl font-bold mt-2">{title}</h2>
+        <h2 className="text-xl font-bold font-poppins mt-2">{title}</h2>
         {/* Meddelandeikon */}
         <button
           onClick={() => onAction?.(userId)}
-          className="text-gray-600 align-middle dark:text-white hover:text-primary"
+          className="text-gray-600 align-middle hover:text-primary"
           title="Skicka meddelande"
         >
           <EnvelopeIcon className="w-6 h-6" />
         </button>
       </div>
-      <p className="text-gray-700 dark:text-gray-300 mt-1">{description}</p>
+      <p className="text-black mt-1">{description}</p>
     </div>
   );
 }

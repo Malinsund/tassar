@@ -6,6 +6,7 @@ import MessageModal from "@/components/MessageModal";
 import Navbar from "@/components/Navbar";
 import SearchAndFilter from "@/components/search-and-filter";
 import useAdoptionPosts from "@/hooks/useAdoptionPosts";
+import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
 export default function Adoption() {
@@ -35,7 +36,7 @@ export default function Adoption() {
   return (
     <main className="w-full h-full">
       <Header />
-      <div className="hidden lg:block">
+      <div className="hidden lg:block sticky top-0 z-30">
         <Navbar />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4">
@@ -43,12 +44,12 @@ export default function Adoption() {
           <SearchAndFilter />
         </aside>
         <div className="col-span-2 flex flex-col justify-center text-center px-2">
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-6 sticky top-16 z-30">
             <button
               onClick={openPostModal}
               className="flex justify-center border-secondary border-2 text-black bg-white w-full font-poppins text-lg p-2 text-center place-items-center rounded-lg"
             >
-              + nytt inlägg
+              <PlusIcon className="w-6 h-6" /> Nytt inlägg
             </button>
           </div>
 

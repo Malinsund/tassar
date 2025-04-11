@@ -18,7 +18,7 @@ export default function MessageModal({
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className=" sticky top-16 flex dark:text-black justify-center items-center">
       <div className="bg-white p-6 rounded-lg w-96">
         <h2 className="text-2xl font-bold mb-4">Skicka meddelande</h2>
         <textarea
