@@ -31,7 +31,7 @@ export default function ProfilePage() {
 
   const [showMessageModal, setShowMessageModal] = useState(false);
 
-  const openMessageModal = (_recipientUserId: string) => {
+  const openMessageModal = () => {
     setShowMessageModal(true);
   };
 
@@ -162,7 +162,7 @@ export default function ProfilePage() {
         {!isOwnProfile && (
           <div className="flex justify-center  mt-4">
             <PrimaryButton
-              onClick={() => openMessageModal(userIdToShow)}
+              onClick={() => openMessageModal}
               text="Skicka meddelande"
               className="w-2/3 h-10 z-10"
             />

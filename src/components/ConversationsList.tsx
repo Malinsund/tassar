@@ -17,6 +17,14 @@ type Conversation = {
   id: string;
   participants: string[];
 };
+type Message = {
+  senderId: string;
+  text: string;
+  timestamp: {
+    seconds: number;
+    nanoseconds: number;
+  };
+};
 
 const ConversationsList = () => {
   const { user } = useAuth();
@@ -25,7 +33,7 @@ const ConversationsList = () => {
   const [activeConversationId, setActiveConversationId] = useState<
     string | null
   >(null);
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
