@@ -1,4 +1,16 @@
+import { useAuth } from "@/context/AuthContext";
+import { db } from "@/firebaseConfig";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  serverTimestamp,
+  where,
+} from "firebase/firestore";
 import { useState } from "react";
+import PrimaryButton from "./PrimaryButton";
+import SecondaryButton from "./SecondaryButton";
 
 type MessageModalProps = {
   userId: string;
@@ -11,10 +23,62 @@ export default function MessageModal({
 }: MessageModalProps) {
   const [message, setMessage] = useState("");
 
-  const handleSendMessage = () => {
-    console.log("Skickar meddelande till", userId);
-    console.log("Meddelande:", message);
-    closeModal();
+  const { user } = useAuth();
+
+  const handleSendMessage = async () => {
+    if (!message.trim()) return;
+
+    const senderId = user?.uid;
+    const receiverId = userId;
+
+    if (!senderId) return;
+
+    try {
+      const conversationsRef = collection(db, "conversations");
+      const q = query(
+        conversationsRef,
+        where("participants", "array-contains", senderId)
+      );
+      const querySnapshot = await getDocs(q);
+
+      let conversationId = null;
+
+      querySnapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        if (
+          data.participants.includes(senderId) &&
+          data.participants.includes(receiverId)
+        ) {
+          conversationId = docSnap.id;
+        }
+      });
+
+      if (!conversationId) {
+        const newConvRef = await addDoc(conversationsRef, {
+          participants: [senderId, receiverId],
+          lastUpdated: serverTimestamp(),
+        });
+        conversationId = newConvRef.id;
+      }
+
+      const messagesRef = collection(
+        db,
+        "conversations",
+        conversationId,
+        "messages"
+      );
+      await addDoc(messagesRef, {
+        senderId,
+        text: message,
+        timestamp: serverTimestamp(),
+      });
+
+      console.log("Meddelande skickat till", receiverId);
+      setMessage("");
+      closeModal();
+    } catch (error) {
+      console.error("Fel vid meddelandesändning:", error);
+    }
   };
 
   return (
@@ -28,18 +92,17 @@ export default function MessageModal({
           placeholder="Skriv ditt meddelande här"
         />
         <div className="mt-4 flex justify-between">
-          <button
+          <SecondaryButton
             onClick={closeModal}
             className="bg-gray-500 text-white px-4 py-2 rounded"
-          >
-            Stäng
-          </button>
-          <button
+            text="stäng"
+          />
+
+          <PrimaryButton
             onClick={handleSendMessage}
-            className="bg-primary text-white px-4 py-2 rounded"
-          >
-            Skicka
-          </button>
+            className=" px-4 py-2 rounded"
+            text="skicka"
+          />
         </div>
       </div>
     </div>

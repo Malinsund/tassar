@@ -32,15 +32,6 @@ export default function SearchAndFilter() {
           onChange={handleSearchChange}
           className="w-full md:w-2/3 p-2 border-2 border-secondary rounded-md"
         />
-
-        {searchQuery && (
-          <button
-            onClick={clearSearch}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-700"
-          >
-            ✖
-          </button>
-        )}
       </label>
 
       <div className="w-full md:w-2/3">

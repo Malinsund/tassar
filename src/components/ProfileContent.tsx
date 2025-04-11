@@ -12,12 +12,14 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import router from "next/router";
 import { useEffect, useState } from "react";
+import ConversationsList from "./ConversationsList";
+import MessageModal from "./MessageModal";
 
 export default function ProfilePage() {
   const { user } = useAuth();
   const searchParams = useSearchParams();
   const queryUserId = searchParams?.get("userId");
-  const userIdToShow = queryUserId || user?.uid;
+  const userIdToShow = queryUserId || user?.uid || "";
 
   const { username, description, setDescription } = useUserData(userIdToShow);
   const { userImages, deleteUserImage } = useUserImages(userIdToShow);
@@ -26,6 +28,16 @@ export default function ProfilePage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [newDescription, setNewDescription] = useState(description || "");
   const [isOwnProfile, setIsOwnProfile] = useState(false);
+
+  const [showMessageModal, setShowMessageModal] = useState(false);
+
+  const openMessageModal = (recipientUserId: string) => {
+    setShowMessageModal(true);
+  };
+
+  const closeMessageModal = () => {
+    setShowMessageModal(false);
+  };
 
   useEffect(() => {
     setIsOwnProfile(userIdToShow === user?.uid);
@@ -106,7 +118,7 @@ export default function ProfilePage() {
                   setIsEditing(!isEditing);
                 }}
                 text={isEditing ? "Spara" : "Redigera profil"}
-                className="lg:place-content-end"
+                className="lg:place-content-end "
               />
             </div>
           )}
@@ -141,9 +153,29 @@ export default function ProfilePage() {
         </div>
 
         {/* Meddelanden */}
-        <div className="col-span-1 lg:col-span-1 lg:block p-4">
-          <h2 className="text-xl font-bold">Meddelanden</h2>
-        </div>
+        {isOwnProfile && (
+          <div className="col-span-1 lg:col-span-1 lg:block p-4">
+            <h2 className="text-xl font-bold">Meddelanden</h2>
+            <ConversationsList />
+          </div>
+        )}
+        {!isOwnProfile && (
+          <div className="flex justify-center  mt-4">
+            <PrimaryButton
+              onClick={() => openMessageModal(userIdToShow)}
+              text="Skicka meddelande"
+              className="w-2/3 h-10 z-10"
+            />
+            <div className="absolute flex justify-center items-center z-20">
+              {showMessageModal && (
+                <MessageModal
+                  userId={userIdToShow!}
+                  closeModal={closeMessageModal}
+                />
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Bekräftelse för att ta bort bild */}
