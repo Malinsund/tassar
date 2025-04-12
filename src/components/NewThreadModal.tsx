@@ -1,5 +1,5 @@
 import { db } from "@/firebaseConfig";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 
 import PrimaryButton from "@/components/PrimaryButton";
@@ -39,7 +39,7 @@ export default function NewThreadModal({ isOpen, onClose }: Props) {
       title,
       content,
       category: selectedCategory,
-      createdAt: new Date(),
+      createdAt: serverTimestamp(),
     });
 
     setTitle("");

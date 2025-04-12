@@ -41,13 +41,15 @@ export default function MessageModal({
       );
       const querySnapshot = await getDocs(q);
 
+      const sortedIds = [senderId, receiverId].sort();
       let conversationId = null;
 
       querySnapshot.forEach((docSnap) => {
         const data = docSnap.data();
+        const existingIds = data.participants.slice().sort();
         if (
-          data.participants.includes(senderId) &&
-          data.participants.includes(receiverId)
+          existingIds[0] === sortedIds[0] &&
+          existingIds[1] === sortedIds[1]
         ) {
           conversationId = docSnap.id;
         }
@@ -55,7 +57,7 @@ export default function MessageModal({
 
       if (!conversationId) {
         const newConvRef = await addDoc(conversationsRef, {
-          participants: [senderId, receiverId],
+          participants: sortedIds,
           lastUpdated: serverTimestamp(),
         });
         conversationId = newConvRef.id;

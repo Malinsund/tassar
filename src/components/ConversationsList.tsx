@@ -93,7 +93,6 @@ const ConversationsList = () => {
       messages: arrayUnion({
         senderId: user?.uid,
         text: newMessage,
-        timestamp: new Date(),
       }),
     });
 
@@ -123,7 +122,7 @@ const ConversationsList = () => {
                     activeConversationId === conv.id ? null : conv.id
                   )
                 }
-                className="text-primary hover:underline"
+                className="border-2 border-secondary bg-white rounded-lg p-2 text-primary font-poppins hover:font-bold"
               >
                 Konversation med {otherUserName}
               </button>
@@ -146,8 +145,8 @@ const ConversationsList = () => {
                         key={index}
                         className={`p-2 rounded-md my-1 ${
                           msg.senderId === user?.uid
-                            ? "bg-blue-300 text-right"
-                            : "bg-gray-300 text-left"
+                            ? "bg-blue-100 text-right text-black"
+                            : "bg-primary text-left text-white"
                         }`}
                       >
                         {msg.text}

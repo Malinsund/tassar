@@ -31,7 +31,8 @@ export default function ProfilePage() {
 
   const [showMessageModal, setShowMessageModal] = useState(false);
 
-  const openMessageModal = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const openMessageModal = (userIdToShow: string) => {
     setShowMessageModal(true);
   };
 
@@ -162,7 +163,7 @@ export default function ProfilePage() {
         {!isOwnProfile && (
           <div className="flex justify-center  mt-4">
             <PrimaryButton
-              onClick={() => openMessageModal}
+              onClick={() => openMessageModal(userIdToShow)}
               text="Skicka meddelande"
               className="w-2/3 h-10 z-10"
             />
