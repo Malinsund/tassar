@@ -19,7 +19,7 @@ export default function Header() {
     <div className="flex justify-between lg:w-screen p-4 lg:p-8">
       <div className="lg:hidden">
         <button onClick={() => setIsOpen(true)} className="text-black">
-          <Bars3Icon className="w-8 h-8 cursor-pointer" />
+          <Bars3Icon className="w-8 h-8 cursor-pointer dark:text-white" />
         </button>
       </div>
 
