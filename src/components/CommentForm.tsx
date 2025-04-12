@@ -23,7 +23,7 @@ const CommentForm = ({
   };
 
   return (
-    <form onSubmit={handleCommentSubmit} className="mt-4">
+    <form onSubmit={handleCommentSubmit} className="mt-4 dark:text-black">
       <input
         type="text"
         value={comment}
