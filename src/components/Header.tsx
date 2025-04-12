@@ -4,6 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import Navbar from "./Navbar";
 import ProfileImageView from "./ProfileImageView";
@@ -69,10 +70,12 @@ export default function Header() {
             <div className="rounded-full w-10 border-2">
               <ProfileImageView imageUrl={imageUrl} />
             </div>
-            <p className="flex items-center text-lg text-white font-poppins px-2">
-              {" "}
-              {user?.username}
-            </p>
+            <Link href={"/profile"}>
+              <p className="flex items-center text-lg text-white font-poppins px-2">
+                {" "}
+                {user?.username}
+              </p>
+            </Link>
           </div>
         </div>
 
