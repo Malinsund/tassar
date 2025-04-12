@@ -1,14 +1,12 @@
 import { useAuth } from "@/context/AuthContext";
 import { db } from "@/firebaseConfig";
+import { useMessages } from "@/hooks/useMessages";
 import {
-  arrayUnion,
   collection,
   doc,
   getDoc,
   getDocs,
   query,
-  serverTimestamp,
-  updateDoc,
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -17,7 +15,8 @@ type Conversation = {
   id: string;
   participants: string[];
 };
-type Message = {
+
+export type Message = {
   senderId: string;
   text: string;
   timestamp: {
@@ -33,18 +32,19 @@ const ConversationsList = () => {
   const [activeConversationId, setActiveConversationId] = useState<
     string | null
   >(null);
-  const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
+
+  const { messages, sendMessage } = useMessages(activeConversationId);
 
   useEffect(() => {
     const fetchConversations = async () => {
       if (!user) return;
 
-      const q = query(
+      const convQuery = query(
         collection(db, "conversations"),
         where("participants", "array-contains", user.uid)
       );
-      const querySnapshot = await getDocs(q);
+      const querySnapshot = await getDocs(convQuery);
       const convs = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...(doc.data() as Omit<Conversation, "id">),
@@ -61,7 +61,7 @@ const ConversationsList = () => {
         const userRef = doc(db, "users", userId);
         const userSnap = await getDoc(userRef);
         if (userSnap.exists()) {
-          names[userId] = userSnap.data().username || "Okänt namn";
+          names[userId] = userSnap.data().username || "Okänt användarnamn";
         }
       }
       setUserNames(names);
@@ -70,36 +70,9 @@ const ConversationsList = () => {
     fetchConversations();
   }, [user]);
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      if (!activeConversationId) return;
-
-      const convRef = doc(db, "conversations", activeConversationId);
-      const convSnap = await getDoc(convRef);
-      if (convSnap.exists()) {
-        setMessages(convSnap.data().messages || []);
-      }
-    };
-
-    fetchMessages();
-  }, [activeConversationId]);
-
   const handleSendMessage = async () => {
     if (!newMessage.trim() || !activeConversationId) return;
-
-    const convRef = doc(db, "conversations", activeConversationId);
-
-    await updateDoc(convRef, {
-      messages: arrayUnion({
-        senderId: user?.uid,
-        text: newMessage,
-      }),
-    });
-
-    await updateDoc(convRef, {
-      lastUpdated: serverTimestamp(),
-    });
-
+    await sendMessage(newMessage);
     setNewMessage("");
   };
 
@@ -127,9 +100,8 @@ const ConversationsList = () => {
                 Konversation med {otherUserName}
               </button>
 
-              {/* Chat-rutan */}
               {activeConversationId === conv.id && (
-                <div className="p-4 bg-white shadow-lg rounded-md mt-4">
+                <div className="p-4 bg-white shadow-lg rounded-md mt-4 relative dark:text-black">
                   <button
                     onClick={() => setActiveConversationId(null)}
                     className="text-xl absolute top-2 right-2"
