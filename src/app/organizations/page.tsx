@@ -8,7 +8,7 @@ export default function Adoption() {
       <div className="hidden lg:block">
         <Navbar />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 m-4 lg:m-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 m-4 lg:m-10 dark:text-black">
         <section className="flex w-full h-40 bg-gray-100 p-4 rounded-lg">
           <img
             src="/räv.jpg"
