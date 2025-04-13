@@ -43,7 +43,7 @@ export default function Home() {
               placeholder="E-post"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border p-2 rounded w-64 mb-2"
+              className="border p-2 rounded w-64 mb-2 dark:text-black"
               required
             />
             <input
@@ -51,7 +51,7 @@ export default function Home() {
               placeholder="Lösenord"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border p-2 rounded w-64 mb-2"
+              className="border p-2 rounded w-64 mb-2 dark:text-black"
               required
             />
             <button
