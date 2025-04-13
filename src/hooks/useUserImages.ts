@@ -1,5 +1,5 @@
 import { db } from "@/firebaseConfig";
-import { arrayRemove, collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export function useUserImages(userId: string | undefined) {
@@ -30,24 +30,21 @@ export function useUserImages(userId: string | undefined) {
 
   const deleteUserImage = async (image: string) => {
     if (!userId) return;
-
+  
     const querySnapshot = await getDocs(collection(db, "posts"));
-
-   
+  
     querySnapshot.forEach(async (docSnapshot) => {
       const post = docSnapshot.data();
       const postId = docSnapshot.id;
-
+  
+     
       if (post.userId === userId && post.imageUrl === image) {
-        
         const postRef = doc(db, "posts", postId);
-        await updateDoc(postRef, {
-          imageUrl: arrayRemove(image), 
-        });
+        await deleteDoc(postRef); 
       }
     });
-
-   
+  
+    
     setUserImages((prevImages) => prevImages.filter((img) => img !== image));
   };
 
