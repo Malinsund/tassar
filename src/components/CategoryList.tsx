@@ -58,7 +58,7 @@ const CategoryList = ({ onCategorySelect }: Props) => {
                     <li key={sub}>
                       <button
                         onClick={() => onCategorySelect(sub)}
-                        className="text-gray-700 text-md font-poppins hover:underline"
+                        className="text-gray-700 dark:text-white text-md font-poppins hover:underline"
                       >
                         - {sub}
                       </button>

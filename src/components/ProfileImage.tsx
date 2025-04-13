@@ -78,7 +78,13 @@ const ProfileImage: FC<{
         />
       ) : (
         <div>
-          <Image src="/noImage.svg" alt="no image" width={50} height={50} />
+          <Image
+            src="/noImage.svg"
+            alt="no image"
+            width={50}
+            height={50}
+            className="dark:text-white"
+          />
           <p>Ingen bild vald</p>
         </div>
       )}
@@ -87,7 +93,7 @@ const ProfileImage: FC<{
         <div className="flex flex-col mt-4">
           <button
             onClick={triggerFileInput}
-            className="flex justify-center text-gray-600 hover:text-gray-800 "
+            className="flex justify-center text-gray-600 dark:text-white hover:text-gray-800 "
           >
             <CameraIcon className="w-8 h-8" />
           </button>

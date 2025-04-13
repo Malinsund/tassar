@@ -3,7 +3,7 @@ import { db } from "@/firebaseConfig";
 import {
   addDoc,
   collection,
-  getDocs,
+  onSnapshot,
   orderBy,
   query,
   serverTimestamp,
@@ -34,24 +34,23 @@ export default function ThreadView({ thread }: Props) {
   const [replies, setReplies] = useState<Reply[]>([]);
 
   useEffect(() => {
-    const fetchReplies = async () => {
-      if (!thread) return;
+    if (!thread) return;
 
-      const repliesQuery = query(
-        collection(db, "forumReplies"),
-        where("threadId", "==", thread.id),
-        orderBy("createdAt", "asc")
-      );
-      const querySnapshot = await getDocs(repliesQuery);
-      const fetchedReplies = querySnapshot.docs.map((doc) => ({
+    const repliesQuery = query(
+      collection(db, "forumReplies"),
+      where("threadId", "==", thread.id),
+      orderBy("createdAt", "asc")
+    );
+
+    const unsubscribe = onSnapshot(repliesQuery, (snapshot) => {
+      const fetchedReplies = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       })) as Reply[];
-
       setReplies(fetchedReplies);
-    };
+    });
 
-    fetchReplies();
+    return () => unsubscribe();
   }, [thread]);
 
   const handleReplySubmit = async () => {

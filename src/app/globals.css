@@ -14,6 +14,7 @@
   --grey50:#606D79;
   --greyopac:#606d795e;
   --whiteopac:rgba(255, 255, 255, 0.868);
+  --blackopac: #171717a6;
 
   --destructive:#BB0505;
  
@@ -45,5 +46,11 @@ color:black;
 
 .dark .hamMen.active {
   background-color: white;
+  color: black;
+}
+input::placeholder {
+  color: black;
+}
+textarea::placeholder {
   color: black;
 }

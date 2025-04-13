@@ -122,7 +122,13 @@ const ConversationsList = () => {
                         }`}
                       >
                         {msg.text}
-                        <span className="block text-xs text-gray-500">
+                        <span
+                          className={`block text-xs ${
+                            msg.senderId === user?.uid
+                              ? "text-black"
+                              : "text-white"
+                          }`}
+                        >
                           {new Date(
                             msg.timestamp?.seconds * 1000
                           ).toLocaleTimeString()}

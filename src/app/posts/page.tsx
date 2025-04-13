@@ -105,7 +105,7 @@ export default function PostPage() {
         <div className="sticky bottom-0 z-30 flex justify-center lg:hidden">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-whiteopac text-black p-2 text-center place-items-center  w-full"
+            className="bg-whiteopac text-black dark:bg-blackopac dark:text-white p-2 text-center place-items-center  w-full"
           >
             <PlusIcon className="w-8 h-8" />
           </button>

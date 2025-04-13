@@ -103,7 +103,7 @@ export default function ProfilePage() {
           <div className="text-left lg:text-center">
             {isEditing && isOwnProfile ? (
               <textarea
-                className="rounded-lg border-grey10 w-56 h-24 lg:w-72 p-2"
+                className="rounded-lg dark:text-black border-grey10 w-56 h-24 lg:w-72 p-2"
                 value={newDescription}
                 onChange={(e) => setNewDescription(e.target.value)}
               />

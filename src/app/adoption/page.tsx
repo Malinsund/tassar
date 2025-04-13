@@ -44,7 +44,7 @@ export default function Adoption() {
           <SearchAndFilter />
         </aside>
         <div className="col-span-2 flex flex-col justify-center text-center px-2">
-          <div className="flex justify-center mb-6 sticky top-16 z-30">
+          <div className="justify-center mb-6 sticky top-16 z-30 hidden lg:block">
             <button
               onClick={openPostModal}
               className="flex justify-center border-secondary border-2 text-black bg-white w-full font-poppins text-lg p-2 text-center place-items-center rounded-lg"
@@ -72,6 +72,14 @@ export default function Adoption() {
               </div>
             ))
           )}
+          <div className="sticky bottom-0 z-30 flex justify-center lg:hidden">
+            <button
+              onClick={openPostModal}
+              className="bg-whiteopac dark:bg-blackopac dark:text-white text-black p-2 text-center place-items-center  w-full"
+            >
+              <PlusIcon className="w-8 h-8" />
+            </button>
+          </div>
         </div>
 
         {isPostModalOpen && (

@@ -23,7 +23,13 @@ export default function RegisterPage() {
 
   return (
     <div className="flex flex-col justify-center items-center text-center">
-      <Image src="/logo.svg" alt="tassar logo" width={500} height={500} />
+      <Image
+        src="/logo.svg"
+        alt="tassar logo"
+        width={200}
+        height={200}
+        className="m-6"
+      />
       <h1 className="font-special text-2xl">Registrera dig</h1>
       <form onSubmit={handleRegister} className="flex flex-col items-center">
         <input
@@ -39,7 +45,7 @@ export default function RegisterPage() {
           placeholder="E-post"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border p-2 rounded w-64 mb-2"
+          className="border p-2 rounded w-64 mb-2 dark:text-black"
           required
         />
         <input
@@ -47,7 +53,7 @@ export default function RegisterPage() {
           placeholder="Lösenord"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border p-2 rounded w-64 mb-2"
+          className="border p-2 rounded w-64 mb-2 dark:text-black"
           required
         />
         <button
