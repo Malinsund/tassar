@@ -9,6 +9,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -18,10 +19,12 @@ export default function Home() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage(""); // rensa tidigare fel
     try {
       await login(email, password);
     } catch (error) {
       console.error("Login error:", error);
+      setErrorMessage("Fel e-postadress eller lösenord.");
     }
   };
 
@@ -37,7 +40,14 @@ export default function Home() {
 
       {!user && (
         <div className="mt-4">
+          {errorMessage && <p className="text-red-600 mt-2">{errorMessage}</p>}
           <form onSubmit={handleLogin} className="flex flex-col items-center">
+            <label
+              htmlFor="email"
+              className="dark:text-white font-poppins text-xs"
+            >
+              E-post
+            </label>
             <input
               type="email"
               placeholder="E-post"
@@ -46,6 +56,13 @@ export default function Home() {
               className="border p-2 rounded w-64 mb-2 dark:text-black"
               required
             />
+
+            <label
+              htmlFor="password"
+              className="dark:text-white font-poppins text-xs"
+            >
+              Lösenord
+            </label>
             <input
               type="password"
               placeholder="Lösenord"
@@ -54,6 +71,7 @@ export default function Home() {
               className="border p-2 rounded w-64 mb-2 dark:text-black"
               required
             />
+
             <button
               type="submit"
               className="bg-primary font-special font-semibold text-white px-4 py-2 rounded"
@@ -67,7 +85,7 @@ export default function Home() {
             Inte medlem än? Registrera dig{" "}
             <button
               onClick={() => router.push("/register")}
-              className="text-blue-600 underline"
+              className="text-blue-600 dark:text-secondary underline"
             >
               här
             </button>
