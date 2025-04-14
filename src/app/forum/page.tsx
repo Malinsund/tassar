@@ -21,10 +21,12 @@ export default function Forum() {
 
   return (
     <main className="max-h-screen">
-      <Header />
-      <div className="hidden lg:block">
+      <header>
+        <Header />
+      </header>
+      <nav className="hidden lg:block">
         <Navbar />
-      </div>
+      </nav>
       <div className="grid lg:grid-cols-8 gap-2 m-2">
         <div className="flex justify-between p-4 lg:col-span-2">
           <div>

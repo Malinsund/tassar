@@ -16,7 +16,7 @@ export default function Header() {
   const { user } = useAuth();
 
   return (
-    <div className="flex justify-between lg:w-screen p-4 lg:p-8">
+    <header className="flex justify-between lg:w-screen p-4 lg:p-8">
       <div className="lg:hidden">
         <button
           onClick={() => setIsOpen(true)}
@@ -44,7 +44,7 @@ export default function Header() {
       </div>
 
       {/* Hamburgermeny med slide-in effekt */}
-      <div
+      <nav
         className={`fixed top-0 left-0 h-screen w-3/4 z-50 bg-primary text-white shadow-lg lg:hidden transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
@@ -62,7 +62,7 @@ export default function Header() {
 
         {/* Själva menyn */}
         <Navbar />
-      </div>
+      </nav>
 
       {/* Profilmeny */}
       <div
@@ -99,6 +99,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }

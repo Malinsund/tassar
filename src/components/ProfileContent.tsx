@@ -87,9 +87,9 @@ export default function ProfilePage() {
   return (
     <main>
       <Header />
-      <div className="hidden lg:block">
+      <nav className="hidden lg:block">
         <Navbar />
-      </div>
+      </nav>
       <div className="grid grid-cols-1 lg:grid-cols-4 lg:h-screen gap-2">
         {/* Profilinformation */}
         <div className="flex flex-col items-center col-span-1 p-4 gap-2 lg:gap-4">

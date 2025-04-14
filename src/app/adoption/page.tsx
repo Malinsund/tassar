@@ -35,15 +35,17 @@ export default function Adoption() {
 
   return (
     <main className="w-full h-full">
-      <Header />
-      <div className="hidden lg:block sticky top-0 z-30">
+      <header>
+        <Header />
+      </header>
+      <nav className="hidden lg:block sticky top-0 z-30">
         <Navbar />
-      </div>
+      </nav>
       <div className="grid grid-cols-1 lg:grid-cols-4">
-        <aside className="col-span-1 p-8">
+        <div className="col-span-1 p-8">
           <h1 className="font-special text-2xl m-6">Omplacering</h1>
           <SearchAndFilter />
-        </aside>
+        </div>
         <div className="col-span-2 flex flex-col justify-center text-center px-2">
           <div className="justify-center mb-6 sticky top-16 z-30 hidden lg:block">
             <button

@@ -10,7 +10,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row justify-center gap-4 lg:gap-20 mb-4 bg-primary lg:bg-secondary font-special text-2xl color-primary">
+    <nav className="flex flex-col lg:flex-row justify-center gap-4 lg:gap-20 mb-4 bg-primary lg:bg-secondary font-special text-2xl color-primary">
       <div className={`hamMen p-2 ${isActive("/posts")}`}>
         <Link href={"/posts"}>
           <h2>Flöde</h2>
@@ -41,6 +41,6 @@ export default function Navbar() {
           <h2>Profil</h2>
         </Link>
       </div>
-    </div>
+    </nav>
   );
 }
