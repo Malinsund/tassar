@@ -167,7 +167,7 @@ const PostModal: React.FC<PostModalProps> = ({
               <div className="flex justify-center items-center">
                 <Image
                   src={imagePreviewUrl!}
-                  alt="Förhandsgranskning"
+                  alt="Förhandsgranskning av vald bild från uppladdning"
                   width={100}
                   height={100}
                   className="mt-4 max-h-48 object-contain rounded-lg"

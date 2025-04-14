@@ -12,7 +12,7 @@ const ProfileImageView: FC<ProfileImageViewProps> = ({ imageUrl }) => {
       {imageUrl ? (
         <Image
           src={imageUrl}
-          alt="Profilbild"
+          alt="inloggad användares profilbild"
           className="w-20 h-10 object-cover rounded-full  "
           width={80}
           height={80}

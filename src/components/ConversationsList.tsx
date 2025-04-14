@@ -103,6 +103,7 @@ const ConversationsList = () => {
               {activeConversationId === conv.id && (
                 <div className="p-4 bg-white shadow-lg rounded-md mt-4 relative dark:text-black">
                   <button
+                    aria-label="stäng rutan för konversation"
                     onClick={() => setActiveConversationId(null)}
                     className="text-xl absolute top-2 right-2"
                   >

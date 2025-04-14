@@ -25,7 +25,7 @@ export default function RegisterPage() {
     <div className="flex flex-col justify-center items-center text-center">
       <Image
         src="/logo.svg"
-        alt="tassar logo"
+        alt="tassar logotyp"
         width={200}
         height={200}
         className="m-6"

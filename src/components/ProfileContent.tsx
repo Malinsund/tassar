@@ -52,7 +52,12 @@ export default function ProfilePage() {
   if (!user) {
     return (
       <div className="flex flex-col justify-center align-middle items-center">
-        <Image src="/tassar.svg" alt="tassar logo" width={200} height={200} />
+        <Image
+          src="/tassar.svg"
+          alt="logga för hemsidan föreställande en tass med texten tassar"
+          width={200}
+          height={200}
+        />
         <p className="text-center m-4 text-xl font-special">
           Logga in för att se din profil
         </p>
@@ -88,6 +93,7 @@ export default function ProfilePage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 lg:h-screen gap-2">
         {/* Profilinformation */}
         <div className="flex flex-col items-center col-span-1 p-4 gap-2 lg:gap-4">
+          <h1 className="hidden">{username} profil</h1>
           <div className=" rounded-full ">
             <ProfileImage
               userId={userIdToShow!}
@@ -96,9 +102,9 @@ export default function ProfilePage() {
             />
           </div>
           {username && (
-            <h2 className="text-2xl font-bold self-start lg:self-center text-left lg:text-center">
+            <h1 className="text-2xl font-bold self-start lg:self-center text-left lg:text-center">
               @{username}
-            </h2>
+            </h1>
           )}
           <div className="text-left lg:text-center">
             {isEditing && isOwnProfile ? (
@@ -132,6 +138,7 @@ export default function ProfilePage() {
               <div key={index} className="relative m-2">
                 {isEditing && isOwnProfile && (
                   <button
+                    aria-label="Radera inläggsbild"
                     className="absolute -top-2 -right-2"
                     onClick={() => {
                       setSelectedImage(image);
@@ -143,7 +150,7 @@ export default function ProfilePage() {
                 )}
                 <Image
                   src={image}
-                  alt={`User Image ${index}`}
+                  alt={`använarens profilbild ${index}`}
                   className="w-32 h-32 object-cover rounded-lg"
                   width={100}
                   height={100}

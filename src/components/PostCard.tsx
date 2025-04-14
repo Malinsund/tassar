@@ -104,7 +104,7 @@ const PostCard: React.FC<PostCardProps> = ({
         <div className="mt-3 flex justify-center">
           <Image
             src={imageUrl}
-            alt="uploaded image"
+            alt={`Bild uppladdad av ${username}`}
             width={500}
             height={500}
             className="rounded-lg object-cover w-full max-h-[800px]"

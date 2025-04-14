@@ -27,19 +27,23 @@ export default function Forum() {
       </div>
       <div className="grid lg:grid-cols-8 gap-2 m-2">
         <div className="flex justify-between p-4 lg:col-span-2">
-          <CategoryList
-            onCategorySelect={(category) => {
-              setSelectedCategory(category);
-              setActiveThread(null);
-            }}
-          />
-          <div className="p-2">
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="rounded-full p-2 w-12"
-            >
-              <PencilSquareIcon />
-            </button>
+          <div>
+            <h1 className="font-special text-2xl m-6">Forumet</h1>
+            <CategoryList
+              onCategorySelect={(category) => {
+                setSelectedCategory(category);
+                setActiveThread(null);
+              }}
+            />
+            <div className="p-2">
+              <button
+                aria-label="Lägg upp ny tråd i forumet"
+                onClick={() => setIsModalOpen(true)}
+                className="rounded-full p-2 w-12"
+              >
+                <PencilSquareIcon />
+              </button>
+            </div>
           </div>
         </div>
         <div className=" lg:col-span-2 p-4">

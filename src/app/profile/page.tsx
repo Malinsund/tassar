@@ -10,7 +10,7 @@ export default function ProfilePage() {
   if (!user) {
     return (
       <div>
-        <p>Logga in för att se din profil.</p>
+        <h1>Logga in för att se din profil.</h1>
       </div>
     );
   }

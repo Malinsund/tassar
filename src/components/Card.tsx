@@ -31,6 +31,7 @@ export default function Card({
         <h2 className="text-xl font-bold font-poppins mt-2">{title}</h2>
         {/* Meddelandeikon */}
         <button
+          aria-label="Skicka privatmeddelande"
           onClick={() => onAction?.(userId)}
           className="text-gray-600 align-middle hover:text-primary"
           title="Skicka meddelande"

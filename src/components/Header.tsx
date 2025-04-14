@@ -18,13 +18,22 @@ export default function Header() {
   return (
     <div className="flex justify-between lg:w-screen p-4 lg:p-8">
       <div className="lg:hidden">
-        <button onClick={() => setIsOpen(true)} className="text-black">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="text-black"
+          aria-label="öppna menyn"
+        >
           <Bars3Icon className="w-8 h-8 cursor-pointer dark:text-white" />
         </button>
       </div>
 
       <div className="flex justify-center flex-grow w-32 h-28 lg:w-60 lg:h-44">
-        <Image src="/logo.svg" alt="website logo" width={200} height={200} />
+        <Image
+          src="/logo.svg"
+          alt="webbsidans logga, tassar"
+          width={200}
+          height={200}
+        />
       </div>
 
       <div
@@ -42,7 +51,11 @@ export default function Header() {
       >
         {/* Stängningsknapp för hamburgermeny */}
         <div className="flex justify-end p-4">
-          <button onClick={() => setIsOpen(false)} className="text-white">
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-white"
+            aria-label="stäng menyn"
+          >
             <XMarkIcon className="w-8 h-8 cursor-pointer" />
           </button>
         </div>
@@ -60,6 +73,7 @@ export default function Header() {
         {/* Stängningsknapp*/}
         <div className=" flex justify-between p-4 border-b-2">
           <button
+            aria-label="Stäng menyn"
             onClick={() => setProfileMenuOpen(false)}
             className="text-white"
           >

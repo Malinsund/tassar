@@ -70,7 +70,10 @@ export default function PostPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
-        <div className="lg:col-span-1"></div>
+        <div className="lg:col-span-1">
+          {" "}
+          <h1 className="font-special text-2xl m-6">Välkommen till flödet</h1>
+        </div>
         <aside className="lg:col-span-2 border-2 rounded-lg border-secondary hidden lg:block sticky w-full top-16">
           <button
             onClick={() => setIsModalOpen(true)}
@@ -104,6 +107,7 @@ export default function PostPage() {
         </div>
         <div className="sticky bottom-0 z-30 flex justify-center lg:hidden">
           <button
+            aria-label="lägg upp nytt inlägg i flödet"
             onClick={() => setIsModalOpen(true)}
             className="bg-whiteopac text-black dark:bg-blackopac dark:text-white p-2 text-center place-items-center  w-full"
           >

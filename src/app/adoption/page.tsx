@@ -41,6 +41,7 @@ export default function Adoption() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4">
         <aside className="col-span-1 p-8">
+          <h1 className="font-special text-2xl m-6">Omplacering</h1>
           <SearchAndFilter />
         </aside>
         <div className="col-span-2 flex flex-col justify-center text-center px-2">
@@ -74,6 +75,7 @@ export default function Adoption() {
           )}
           <div className="sticky bottom-0 z-30 flex justify-center lg:hidden">
             <button
+              aria-label="Lägg upp nytt inlägg i omplacering av djur"
               onClick={openPostModal}
               className="bg-whiteopac dark:bg-blackopac dark:text-white text-black p-2 text-center place-items-center  w-full"
             >

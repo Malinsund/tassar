@@ -43,6 +43,7 @@ const CategoryList = ({ onCategorySelect }: Props) => {
         {categories.map((category) => (
           <li key={category.name} className="mb-2">
             <button
+              aria-label="öppna categorin för:"
               onClick={() => {
                 toggleCategory(category.name);
                 onCategorySelect(category.name);

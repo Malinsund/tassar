@@ -80,7 +80,7 @@ const ProfileImage: FC<{
         <div>
           <Image
             src="/noImage.svg"
-            alt="no image"
+            alt=""
             width={50}
             height={50}
             className="dark:text-white"
@@ -92,6 +92,7 @@ const ProfileImage: FC<{
       {isEditing && (
         <div className="flex flex-col mt-4">
           <button
+            aria-label="Tryck för att byta profilbild"
             onClick={triggerFileInput}
             className="flex justify-center text-gray-600 dark:text-white hover:text-gray-800 "
           >
